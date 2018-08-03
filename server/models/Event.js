@@ -8,6 +8,7 @@ const eventSchema = new Schema({
   subscribers: [Schema.Types.ObjectId],
   startDate: Date,
   isDone: Boolean,
+  weeks: [Schema.Types.ObjectId],
 });
 
 const Event = mongoose.model('Event', eventSchema);
