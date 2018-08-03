@@ -4,7 +4,7 @@
   "description": "a small meeting app",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node server/server.js",
+    "start": "babel-node --inspect server/server.js",
     "mongo-db": "md mongo-db & \"C:/Program Files/MongoDb/Server/3.6/bin/mongod.exe\" --dbpath mongo-db"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "eventsource-polyfill": "^0.9.6",
-    "html-webpack-plugin": "^3.2.0"
+    "html-webpack-plugin": "^3.2.0",
+    "node-loader": "^0.6.0"
   }
 }
