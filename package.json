@@ -7,7 +7,6 @@
     "debug": "nodemon --watch server --exec node --require dotenv/config --require babel-register --inspect server/server.js",
     "start": "node ./server/server.js",
     "build": "babel server/ -d server/",
-    "test": "mocha test --recursive --compilers js:babel-register",
     "lint": "eslint src/**",
     "flow": "flow",
     "mongo-db": "md mongo-db & \"C:/Program Files/MongoDb/Server/3.6/bin/mongod.exe\" --dbpath mongo-db"
