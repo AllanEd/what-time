@@ -9,6 +9,7 @@
     "build": "babel server/ -d server/",
     "lint": "eslint src/**",
     "flow": "flow",
+    "win-killall": "taskkill /im node.exe /F",
     "mongo-db": "md mongo-db & \"C:/Program Files/MongoDb/Server/3.6/bin/mongod.exe\" --dbpath mongo-db"
   },
   "repository": {

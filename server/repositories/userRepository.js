@@ -1,6 +1,6 @@
 function create({ User }) {
   async function getAll() {
-    const users = await User.findAll();
+    const users = await User.find();
     return users.map(user => user.toUserModel());
   }
 
