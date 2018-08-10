@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -18,4 +18,4 @@ const weekSchema = new Schema({
 
 const Week = mongoose.model('Week', weekSchema);
 
-export default Week;
+module.exports = Week;

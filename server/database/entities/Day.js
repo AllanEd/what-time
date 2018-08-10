@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
@@ -13,4 +13,4 @@ const daySchema = new Schema({
 
 const Day = mongoose.model('Day', daySchema);
 
-export default Day;
+module.exports = Day;
