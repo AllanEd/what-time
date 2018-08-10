@@ -1,35 +1,25 @@
-import express from 'express';
-import webpack from 'webpack';
-import path from 'path';
-import open from 'open';
-import config from '../webpack.config.dev';
+const logger = require('./libs/logger');
+const { port } = require('./configuration');
+const db = require('./database');
+const repositories = require('./repositories')(db);
+const services = require('./services')(repositories);
+const app = require('./http/app')(services);
+const signals = require('./signals');
+const sampleData = require('./sampleData')(services);
 
-import routeEvents from './routes/events';
-import './database';
-
-/* eslint-disable no-console */
-
-const port = 3000;
-const app = express();
-const compiler = webpack(config);
-
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: config.output.publicPath,
-}));
-
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+const server = app.listen(port, () => {
+  logger.info(`Listening on *:${port}`);
 });
 
-app.listen(port, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    open('http://localhost:3000');
-  }
+if (process.env.NODE_ENV === 'develop') {
+  db.dropDatabase();
+  sampleData.create();
+};
+
+const shutdown = signals.init(async () => {
+  await db.close();
+  await server.close();
 });
 
-routeEvents(app);
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);

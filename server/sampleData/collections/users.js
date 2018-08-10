@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Types;
 
@@ -74,4 +74,4 @@ const users = [
   },
 ];
 
-export default users;
+module.exports = users;
