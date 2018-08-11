@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Types;
 
-const events = [{
+const appointments = [{
   _id: ObjectId('5b64a1d8bb4b5d57d8566126'),
   subscribers: [
     ObjectId('5b64a1d8bb4b5d57d8566120'),
@@ -15,11 +15,11 @@ const events = [{
   weeks: [
     ObjectId('5b64a1d8bb4b5d57d8566127'),
   ],
-  title: 'Event 1',
+  title: 'Appointment 1',
   creator: ObjectId('5b64a1d8bb4b5d57d8566124'),
   startDate: new Date('2018-08-06T12:41:04.588Z'),
   isDone: true,
   __v: 0,
 }];
 
-export default events;
+module.exports = appointments;

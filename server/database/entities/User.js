@@ -8,8 +8,8 @@ const userSchema = new Schema({
   email: String,
   registered: Date,
   lastSignIn: Date,
-  createdEvents: [Schema.Types.ObjectId],
-  subscribedEvents: [Schema.Types.ObjectId],
+  createdAppointments: [Schema.Types.ObjectId],
+  subscribedAppointments: [Schema.Types.ObjectId],
 });
 
 const User = mongoose.model('User', userSchema);

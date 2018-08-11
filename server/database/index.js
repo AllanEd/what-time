@@ -6,13 +6,13 @@ mongoose.connect(connectionString, {useNewUrlParser: true });
 const mongoDb = mongoose.connection;
 
 const User = require('./entities/User');
-const Event = require('./entities/Event');
+const Appointment = require('./entities/Appointment');
 const Week = require('./entities/Week');
 const Day = require('./entities/Day');
 
 module.exports = {
   User,
-  Event,
+  Appointment,
   Week,
   Day,
   dropDatabase: () => mongoDb.dropDatabase()

@@ -1,17 +1,17 @@
 // Register all the services here
 const userServiceFactory = require('./userService');
-const eventServiceFactory = require('./eventService');
+const appointmentServiceFactory = require('./appointmentService');
 const weekServiceFactory = require('./weekService');
 const dayServiceFactory = require('./dayService');
 
 module.exports = repositories => {
   const userService = userServiceFactory.create(repositories.userRepository);
-  const eventService = eventServiceFactory.create(repositories.eventService);
-  const weekService = weekServiceFactory.create(repositories.weekService);
-  const dayService = dayServiceFactory.create(repositories.dayService);
+  const appointmentService = appointmentServiceFactory.create(repositories.appointmentRepository);
+  const weekService = weekServiceFactory.create(repositories.weekRepository);
+  const dayService = dayServiceFactory.create(repositories.dayRepository);
   return {
     userService,
-    eventService,
+    appointmentService,
     weekService,
     dayService,
   };

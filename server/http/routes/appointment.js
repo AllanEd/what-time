@@ -3,12 +3,12 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 const router = express.Router();
 
-function create({ eventService }) {
+function create({ appointmentService }) {
   router.get(
     '/',
     asyncWrapper(async (req, res) => {
-      const events = await eventService.getAllEvents();
-      res.json(events);
+      const appointments = await appointmentService.getAllAppointments();
+      res.json(appointments);
     }),
   );
 
