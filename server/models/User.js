@@ -3,15 +3,22 @@
 class User {
   name: string;
 
+  password: string;
+
   email: string;
 
-  constructor(name: string, email: string) {
-    this.name = name;
-    this.email = email;
+  constructor(userData: Object) {
+    this.name = userData.name;
+    this.password = userData.password;
+    this.email = userData.email;
   }
 
-  static createUsers(users: Array<Object>): Array<Object> {
-    return users.map(user => new User(user.name, user.email));
+  isPasswordValid(password: string): boolean {
+    return password === this.password;
+  };
+
+  static createSubscribers(users: Array<Object>): Array<Object> {
+    return users.map(user => new User(user));
   }
 }
 

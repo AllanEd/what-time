@@ -25,7 +25,7 @@ function create({ userService }) {
     '/',
     asyncWrapper(async (req, res) => {
       const users = req.body;
-      await userService.createUsers(users);
+      await userService.createSubscribers(users);
       res.json({});
     }),
   );

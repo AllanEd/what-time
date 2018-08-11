@@ -12,10 +12,16 @@ function create({ User }) {
     await User.insertMany(users);
   }
 
+  async function findByName(name) {
+    const user = await User.where({name}).findOne();
+    return user.toUserModel();
+  }
+
   return {
     getAll,
     add,
-    addMany
+    addMany,
+    findByName
   };
 }
 

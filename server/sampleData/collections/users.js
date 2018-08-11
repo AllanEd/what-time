@@ -45,6 +45,7 @@ const users = [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Alex',
+    password: 'test',
     email: 'alexander.sattelmaier@gmail.com',
     registered: new Date('2012-03-07T14:28:34.643Z'),
     lastSignIn: new Date('2018-02-01T04:17:29.914Z'),

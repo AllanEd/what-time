@@ -15,14 +15,27 @@ function create(userRepository) {
     await userRepository.add(user);
   }
 
-  async function createUsers(users) {
+  async function createSubscribers(users) {
     await userRepository.addMany(users);
+  }
+
+  async function getUserByName(name) {
+    let user;
+
+    try {
+      user = await userRepository.findByName(name);
+    } catch(error) {
+      console.error(error);
+    }
+
+    return user;
   }
 
   return {
     createUser,
     getAllUsers,
-    createUsers
+    createSubscribers,
+    getUserByName
   };
 }
 

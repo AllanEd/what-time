@@ -25,7 +25,7 @@ class Appointment {
     this.isDone = isDone;
     this.startDate = startDate;
     this.creator = new User(creator.name, creator.email);
-    this.subscribers = User.createUsers(subscribers);
+    this.subscribers = User.createSubscribers(subscribers);
     this.weeks = Week.createWeeks(weeks);
   }
 }
