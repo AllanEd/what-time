@@ -4,10 +4,10 @@ const { Schema } = mongoose;
 
 const daySchema = new Schema({
   date: Date,
-  subscribers: [Schema.Types.ObjectId],
+  subscribers: [{type: Schema.Types.ObjectId, ref: 'User'}],
   timeSlots: {
     type: Map,
-    of: [Schema.Types.ObjectId],
+    of: [{type: Schema.Types.ObjectId, ref: 'User'}],
   },
 });
 

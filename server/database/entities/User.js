@@ -9,8 +9,8 @@ const userSchema = new Schema({
   email: String,
   registered: Date,
   lastSignIn: Date,
-  createdAppointments: [Schema.Types.ObjectId],
-  subscribedAppointments: [Schema.Types.ObjectId],
+  createdAppointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
+  subscribedAppointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
 });
 
 const User = mongoose.model('User', userSchema);

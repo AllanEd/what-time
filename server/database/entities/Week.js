@@ -4,15 +4,15 @@ const { Schema } = mongoose;
 
 const weekSchema = new Schema({
   startDate: Date,
-  subscribers: [Schema.Types.ObjectId],
+  subscribers: [{type: Schema.Types.ObjectId, ref: 'User'}],
   days: {
-    mo: Schema.Types.ObjectId,
-    tu: Schema.Types.ObjectId,
-    we: Schema.Types.ObjectId,
-    th: Schema.Types.ObjectId,
-    fr: Schema.Types.ObjectId,
-    sa: Schema.Types.ObjectId,
-    su: Schema.Types.ObjectId,
+    mo: {type: Schema.Types.ObjectId, ref: 'Day'},
+    tu: {type: Schema.Types.ObjectId, ref: 'Day'},
+    we: {type: Schema.Types.ObjectId, ref: 'Day'},
+    th: {type: Schema.Types.ObjectId, ref: 'Day'},
+    fr: {type: Schema.Types.ObjectId, ref: 'Day'},
+    sa: {type: Schema.Types.ObjectId, ref: 'Day'},
+    su: {type: Schema.Types.ObjectId, ref: 'Day'},
   },
 });
 
