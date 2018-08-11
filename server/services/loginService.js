@@ -17,6 +17,7 @@ function create(userService) {
     }
 
     if (isPasswordValid) {
+      delete user.password
       return user;
     } 
       
