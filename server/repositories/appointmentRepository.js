@@ -1,11 +1,12 @@
 function create({ Appointment }) {
-  async function getAll() {
+  async function getById(id) {
     const populateDocs = [ 
-      { path: 'creator', select: 'name' },
-      { path: 'subscribers', select: 'name' }
+      { path: 'creator', select: ['name', 'email'] },
+      { path: 'subscribers', select: ['name', 'email'] },
+      { path: 'weeks', select: 'startDate' }
     ];
-    const appointments = await Appointment.find().populate(populateDocs).exec();
-    return appointments.map(appointment => appointment.toAppointmentModel());
+    const appointment = await Appointment.findById(id).populate(populateDocs).exec();
+    return appointment.toAppointmentModel();
   }
   
   async function add(appointment) {
@@ -17,7 +18,7 @@ function create({ Appointment }) {
   }
 
   return {
-    getAll,
+    getById,
     add,
     addMany
   };

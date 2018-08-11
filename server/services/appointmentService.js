@@ -1,6 +1,6 @@
 function create(appointmentRepository) {
-  async function getAllAppointments() {
-    const appointments = await appointmentRepository.getAll();
+  async function getAppointmentById(id) {
+    const appointments = await appointmentRepository.getById(id);
     return appointments;
   }
 
@@ -13,7 +13,7 @@ function create(appointmentRepository) {
   }
 
   return {
-    getAllAppointments,
+    getAppointmentById,
     createAppointment,
     createAppointments
   };

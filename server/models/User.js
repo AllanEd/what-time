@@ -1,9 +1,5 @@
 // @flow
 
-/**
- * This is the app Model it is decoupled from
- * the Entities used for the databse
- */
 class User {
   name: string;
 
@@ -12,6 +8,10 @@ class User {
   constructor(name: string, email: string) {
     this.name = name;
     this.email = email;
+  }
+
+  static createUsers(users: Array<Object>): Array<Object> {
+    return users.map(user => new User(user.name, user.email));
   }
 }
 
