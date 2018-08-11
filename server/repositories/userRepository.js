@@ -13,7 +13,18 @@ function create({ User }) {
   }
 
   async function findByName(name) {
-    const user = await User.where({name}).findOne();
+    const populateDocs = [ 
+      {
+        path : 'createdAppointments',
+        populate : [ 
+            { path: 'creator', select: ['name', 'email'] },
+            { path: 'subscribers', select: ['name', 'email'] },
+            { path: 'weeks', select: 'startDate' }
+          ]
+      },
+      'subscribedAppointments'
+    ];
+    const user = await User.where({name}).findOne().populate(populateDocs).exec();
     return user.toUserModel();
   }
 

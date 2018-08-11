@@ -18,7 +18,7 @@ function create(userService) {
 
     if (isPasswordValid) {
       delete user.password
-      return user;
+      return user.getData();
     } 
       
     return "Wrong password";
