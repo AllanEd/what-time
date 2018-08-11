@@ -1,5 +1,7 @@
 // @flow
 
+const bcrypt = require('bcrypt');
+
 class User {
   name: string;
 
@@ -14,7 +16,7 @@ class User {
   }
 
   isPasswordValid(password: string): boolean {
-    return password === this.password;
+    return bcrypt.compareSync(password, this.password);
   };
 
   static createSubscribers(users: Array<Object>): Array<Object> {
