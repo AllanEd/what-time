@@ -19,14 +19,14 @@ class Appointment {
 
   weeks: Array<mongooseModel>;
 
-  constructor(id: string, title: string, isDone: boolean, startDate: Date, creator: mongooseModel, subscribers: Array<mongooseModel>, weeks: Array<mongooseModel>) {
-    this.id = id;
-    this.title = title;
-    this.isDone = isDone;
-    this.startDate = startDate;
-    this.creator = new User(creator);
-    this.subscribers = User.createSubscribers(subscribers);
-    this.weeks = Week.createWeeks(weeks);
+  constructor(appointmentData: Object) {
+    this.id = appointmentData.id;
+    this.title = appointmentData.title;
+    this.isDone = appointmentData.isDone;
+    this.startDate = appointmentData.startDate;
+    this.creator = new User(appointmentData.creator);
+    this.subscribers = User.createSubscribers(appointmentData.subscribers);
+    this.weeks = Week.createWeeks(appointmentData.weeks);
   }
 }
 

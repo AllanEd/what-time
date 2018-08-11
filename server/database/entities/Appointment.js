@@ -15,7 +15,7 @@ const appointmentSchema = new Schema({
 const Appointment = mongoose.model('Appointment', appointmentSchema);
 
 Appointment.prototype.toAppointmentModel = function toAppointmentModel() {
-  return new AppointmentModel(this.id, this.title, this.isDone, this.startDate, this.creator, this.subscribers, this.weeks);
+  return new AppointmentModel(this);
 };
 
 module.exports = Appointment;
