@@ -15,6 +15,7 @@
       "request": "launch",
       "name": "Launch Program: Develop Mode",
       "program": "${workspaceFolder}/server/server.js",
+      "runtimeExecutable": "babel-node",
       "envFile": "${workspaceFolder}/.env",
       "env": {
         "NODE_ENV": "develop"
