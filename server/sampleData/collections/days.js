@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Types;
 
@@ -84,4 +84,4 @@ const days = [
   },
 ];
 
-export default days;
+module.exports = days;

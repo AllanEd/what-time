@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Types;
 
@@ -21,4 +21,4 @@ const weeks = [{
   __v: 0,
 }];
 
-export default weeks;
+module.exports = weeks;
