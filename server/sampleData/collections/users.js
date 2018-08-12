@@ -5,8 +5,7 @@ const { ObjectId } = mongoose.Types;
 const users = [
   {
     _id: ObjectId('5b64a1d8bb4b5d57d8566120'),
-    createdAppointments: null,
-    subscribedAppointments: [
+    appointments: [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Tom',
@@ -16,8 +15,7 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566121'),
-    createdAppointments: null,
-    subscribedAppointments: [
+    appointments: [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Frank',
@@ -27,8 +25,7 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566122'),
-    createdAppointments: null,
-    subscribedAppointments: [
+    appointments: [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Italian',
@@ -38,10 +35,7 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566123'),
-    createdAppointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
-    subscribedAppointments: [
+    appointments: [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Alex',
@@ -52,8 +46,7 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566124'),
-    createdAppointments: null,
-    subscribedAppointments: [
+    appointments: [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Steffen',
@@ -63,8 +56,7 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566125'),
-    createdAppointments: null,
-    subscribedAppointments: [
+    appointments: [
       ObjectId('5b64a1d8bb4b5d57d8566126'),
     ],
     name: 'Simon',
