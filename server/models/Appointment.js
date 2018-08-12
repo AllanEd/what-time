@@ -1,7 +1,7 @@
 // @flow
 
-const mongooseModel = require('mongoose').model;
-const userFactory = require('../factories/userFactory');
+const User = require('./User');
+const Week = require('./Week');
 
 class Appointment {
   id: string;
@@ -12,24 +12,20 @@ class Appointment {
   
   startDate: Date;
 
-  creator: Creator;
+  creator: Object;
 
-  subscribers: Array<Subscriber>;
+  subscribers: Array<Object>;
 
-  weeks: Array<mongooseModel>;
+  weeks: Array<Object>;
 
   constructor(appointmentData: Object) {
     this.id = appointmentData.id;
     this.title = appointmentData.title;
     this.isDone = appointmentData.isDone;
     this.startDate = appointmentData.startDate;
-    this.creator = userFactory.makeCreator(appointmentData.creator);
-    this.subscribers = userFactory.makeSubscribers(appointmentData.subscribers);
-    // this.weeks = Week.createWeeks(appointmentData.weeks);
-  }
-
-  static createCreatedAppointments(appointments: Array<Object>): Array<Object> {
-    return appointments.map(appointment => new Appointment(appointment));
+    this.creator = User.factory.makeCreator(appointmentData.creator);
+    this.subscribers = User.factory.makeSubscribers(appointmentData.subscribers);
+    this.weeks = Week.factory.makeWeeks(appointmentData.weeks);
   }
 }
 
