@@ -1,11 +1,11 @@
 function create(appointmentRepository) {
-  async function getAppointmentById(id) {
+  async function getAppointment(id) {
     const appointments = await appointmentRepository.getById(id);
     return appointments;
   }
 
   async function getUserAppointments(user) {
-    const getAppointments = user.appointments.map(async appointmentId => getAppointmentById(appointmentId));
+    const getAppointments = user.appointments.map(async appointmentId => getAppointment(appointmentId));
 
     return Promise.all(getAppointments)
       .then((appointments) => appointments);
@@ -20,7 +20,7 @@ function create(appointmentRepository) {
   }
 
   return {
-    getAppointmentById,
+    getAppointment,
     getUserAppointments,
     createAppointment,
     createAppointments
