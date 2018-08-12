@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 
 module.exports = services => {
   const userIdController = parameterController.userId.create(services);
-  const appointmentIdController = parameterController.appointmentId.create(services);
   const weekIdController = parameterController.weekId.create(services);
 
   const login = loginRoute.create(services);
@@ -28,7 +27,6 @@ module.exports = services => {
   const day = dayRoute.create(services);
 
   app.param('userId', userIdController);
-  app.param('appointmentId', appointmentIdController);
   app.param('weekId', weekIdController);
 
   app.use('/login', login);
