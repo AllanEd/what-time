@@ -1,5 +1,5 @@
-const idController = require('./id');
+const userIdController = require('./userId');
 
 module.exports = {
-  id: idController
+  userId: userIdController
 }
