@@ -1,7 +1,7 @@
 module.exports = [
   { 
     path: 'creator',
-    select: ['name', 'email'] 
+    select: 'name'
   }, {
     path: 'subscribers',
     select: 'name'
