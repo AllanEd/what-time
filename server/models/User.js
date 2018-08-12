@@ -1,6 +1,7 @@
 // @flow
 
 const bcrypt = require('bcrypt');
+const userFactory = require('../factories/userFactory');
 
 class User {
   id: string;
@@ -13,12 +14,14 @@ class User {
 
   appointments: Array<string>;
 
+  static factory: Object;
+
   constructor(userData: Object) {
     this.id = userData.id;
     this.name = userData.name;
     this.password = userData.password;
     this.email = userData.email;
-    this.appointments = User.obejctIdsToString(userData.appointments)
+    this.appointments = this.constructor.obejctIdsToString(userData.appointments)
   }
 
   isPasswordValid(password: string): boolean {
@@ -29,5 +32,7 @@ class User {
     return objectIds.map(objectId => objectId.toString());
   }
 }
+
+User.factory = userFactory;
 
 module.exports = User;
