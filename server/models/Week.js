@@ -1,9 +1,13 @@
 // @flow
 
+const weekFactory = require('../factories/weekFactory');
+
 class Week {
   id: string;
 
   startDate: Date;
+
+  static factory: Object;
 
   constructor(id: string, startDate: Date) {
     this.id = id;
@@ -14,5 +18,7 @@ class Week {
     return weeks.map(week => new Week(week.id, week.startDate));
   }
 }
+
+Week.factory = weekFactory;
 
 module.exports = Week;
