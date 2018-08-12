@@ -1,11 +1,8 @@
+const populate = require('./populate/appointment');
+
 function create({ Appointment }) {
   async function getById(id) {
-    const populateDocs = [ 
-      { path: 'creator', select: ['name', 'email'] },
-      { path: 'subscribers', select: ['name', 'email'] },
-      { path: 'weeks', select: 'startDate' }
-    ];
-    const appointment = await Appointment.findById(id).populate(populateDocs).exec();
+    const appointment = await Appointment.findById(id).populate(populate).exec();
     return appointment.toAppointmentModel();
   }
   
