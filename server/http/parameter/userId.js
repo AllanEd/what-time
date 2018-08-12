@@ -1,4 +1,4 @@
-function create(userService) {
+function create({ userService }) {
   async function controller(req, res, next, id) {
     const user = await userService.getUser(id);
     req.user = user;
