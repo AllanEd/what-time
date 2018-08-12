@@ -1,49 +1,33 @@
 // @flow
 
 const bcrypt = require('bcrypt');
-const mongooseModel = require('mongoose').model;
-const Appointment = require('./Appointment');
-// const userFactory = require('../factories/userFactory');
 
 class User {
+  id: string;
+
   name: string;
 
   password: string;
 
   email: string;
 
-  createdAppointments: Array<mongooseModel>;
+  appointments: Array<string>;
 
   constructor(userData: Object) {
+    this.id = userData.id;
     this.name = userData.name;
     this.password = userData.password;
     this.email = userData.email;
-    this.createdAppointments = userData.createdAppointments;
-  }
-
-  getData(): Object {
-    return {
-      name: this.name,
-      password: this.password,
-      email: this.email,
-      createdAppointments: this.getCreatedAppointments(),
-    }
+    this.appointments = User.obejctIdsToString(userData.appointments)
   }
 
   isPasswordValid(password: string): boolean {
     return bcrypt.compareSync(password, this.password);
   };
 
-  getCreatedAppointments(): Array<Object> {
-    const createdAppointments = this.createdAppointments.slice();
-    return createdAppointments.map(appointment => new Appointment(appointment));
-  }
-
-  static createSubscribers(users: Array<Object>): Array<Object> {
-    return users.map(user => new User(user));
+  static obejctIdsToString(objectIds: Array<Object>): Array<string> {
+    return objectIds.map(objectId => objectId.toString());
   }
 }
-
-// User.factory = userFactory.create(User);
 
 module.exports = User;

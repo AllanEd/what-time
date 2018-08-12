@@ -12,6 +12,24 @@ function create({ userService }) {
     }),
   );
 
+  router.get(
+    '/:id',
+    asyncWrapper(async (req, res, next) => {
+      const {id} = req.params;
+      const user = await userService.getUser(id);
+      req.user = user;
+      next();
+    }),
+  );
+
+  // router.get(
+  //   '/:id/appointments',
+  //   asyncWrapper(async (req, res, id) => {
+  //     const appointments = await userService.getAppointments(id);
+  //     res.json(appointments);
+  //   }),
+  // );
+
   router.post(
     '/',
     asyncWrapper(async (req, res) => {

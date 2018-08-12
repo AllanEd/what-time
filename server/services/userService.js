@@ -1,9 +1,3 @@
-// DOMAIN LAYER
-// Has the userRepository as a dependency. The UserService does not know
-// nor does it care where the user models came from. This is abstracted away
-// by the implementation of the repositories. It just calls the needed repositories
-// gets the results and usually applies some business logic on them.
-
 function create(userRepository) {
   async function getAllUsers() {
     const users = await userRepository.getAll();
@@ -11,12 +5,16 @@ function create(userRepository) {
   }
 
   async function createUser(user) {
-    // TODO: catch possible errors here and rethrow a custom error you defined instead
     await userRepository.add(user);
   }
 
   async function createSubscribers(users) {
     await userRepository.addMany(users);
+  }
+
+  async function getUser(id) {
+    const user = await userRepository.getById(id);
+    return user;
   }
 
   async function getUserByName(name) {
@@ -34,8 +32,10 @@ function create(userRepository) {
   return {
     createUser,
     getAllUsers,
+    getUser,
     createSubscribers,
-    getUserByName
+    getUserByName,
+    getAppointments
   };
 }
 
