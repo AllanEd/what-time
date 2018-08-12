@@ -11,6 +11,16 @@ function create({ weekService }) {
       res.json(weeks);
     }),
   );
+  // router.get(
+  //   '/',
+  //   asyncWrapper(async (req, res) => {
+  //     const {user} = req;
+  //     const {week} = req;
+  //     const week = await weekService.getUserWeek(user);
+      
+  //     res.json(appointments);
+  //   }),
+  // );
 
   return router;
 }
