@@ -15,7 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 module.exports = services => {
-  const userIdController = parameterController.userId.create(services);
+  const appointmentIdController = parameterController.appointmentId.create(services);
+  const weekIdController = parameterController.weekId.create(services);
 
   const login = loginRoute.create(services);
   const user = userRoute.create(services);
@@ -23,12 +24,14 @@ module.exports = services => {
   const week = weekRoute.create(services);
   const day = dayRoute.create(services);
 
-  app.param('userId', userIdController);
+  
+  app.param('appointmentId', appointmentIdController);
+  app.param('weekId', weekIdController);
 
   app.use('/login', login);
   app.use('/users', user);
-  app.use('/users/:userId/appointments', appointment);
-  app.use('/weeks', week);
+  app.use('/users/appointments', appointment);
+  app.use('/users/:userId/weeks/:appointmentId/weeks', week);
   app.use('/days', day);
   app.use(errorRoute);
   return app;
