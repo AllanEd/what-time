@@ -9,6 +9,7 @@ const appointmentSchema = new Schema({
   subscribers: [{type: Schema.Types.ObjectId, ref: 'User'}],
   startDate: Date,
   isDone: Boolean,
+  weeks: [{type: Schema.Types.ObjectId, ref: 'Week'}],
 });
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);

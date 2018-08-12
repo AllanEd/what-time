@@ -1,6 +1,7 @@
 // @flow
 
 const User = require('./User');
+const Week = require('./Week');
 
 class Appointment {
   id: string;
@@ -24,6 +25,7 @@ class Appointment {
     this.startDate = appointmentData.startDate;
     this.creator = User.factory.makeCreator(appointmentData.creator);
     this.subscribers = User.factory.makeSubscribers(appointmentData.subscribers);
+    this.weeks = Week.factory.makeWeeks(appointmentData.weeks);
   }
 }
 
