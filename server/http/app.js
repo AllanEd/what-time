@@ -36,7 +36,7 @@ module.exports = services => {
   app.use('/login', login);
   app.use('/users', user);
   app.use('/users/:userId', userId);
-  app.use('/users/:userId/appointments', appointment);
+  app.use('/appointments', appointment);
   app.use('/users/:userId/appointments/:appointmentId', appointmentId);
   app.use('/users/:userId/appointments/:appointmentId/weeks/', week);
   app.use('/days', day);
