@@ -34,8 +34,7 @@ function create(userRepository) {
     getAllUsers,
     getUser,
     createSubscribers,
-    getUserByName,
-    getAppointments
+    getUserByName
   };
 }
 
