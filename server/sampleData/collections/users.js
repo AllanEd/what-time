@@ -5,9 +5,6 @@ const { ObjectId } = mongoose.Types;
 const users = [
   {
     _id: ObjectId('5b64a1d8bb4b5d57d8566120'),
-    appointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
     name: 'Tom',
     email: 'tom.starke@gmail.com',
     registered: null,
@@ -15,9 +12,6 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566121'),
-    appointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
     name: 'Frank',
     email: 'frank-elstner@aol.de',
     registered: null,
@@ -25,9 +19,6 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566122'),
-    appointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
     name: 'Italian',
     email: 'italian_barbarian@web.de',
     registered: null,
@@ -35,9 +26,6 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566123'),
-    appointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
     name: 'Alex',
     password: '$2b$10$3jqC1/Xk5M2fIizl/kN2reNU1qL5EjPFqatAH/LJdosn80f/T5RhW',
     email: 'alexander.sattelmaier@gmail.com',
@@ -46,9 +34,6 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566124'),
-    appointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
     name: 'Steffen',
     email: 'steffen@steffen.de',
     registered: null,
@@ -56,9 +41,6 @@ const users = [
     __v: 0,
   }, {
     _id: ObjectId('5b64a1d8bb4b5d57d8566125'),
-    appointments: [
-      ObjectId('5b64a1d8bb4b5d57d8566126'),
-    ],
     name: 'Simon',
     email: 'simon@gosejohan.profi',
     registered: null,
