@@ -27,6 +27,7 @@ module.exports = services => {
 
   app.use('/login', login);
   app.use('/users', user);
+  app.use('/users/:id/appointments', appointment);
   app.use('/weeks', week);
   app.use('/days', day);
   app.use(errorRoute);

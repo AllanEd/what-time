@@ -5,10 +5,11 @@ const router = express.Router();
 
 function create({ appointmentService }) {
   router.get(
-    '/:id',
+    '/',
     asyncWrapper(async (req, res) => {
-      const {id} = req.params;
-      const appointments = await appointmentService.getAppointmentById(id);
+      const {user} = req;
+      const appointments = await appointmentService.getUserAppointments(user);
+      
       res.json(appointments);
     }),
   );

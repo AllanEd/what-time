@@ -4,6 +4,13 @@ function create(appointmentRepository) {
     return appointments;
   }
 
+  async function getUserAppointments(user) {
+    const getAppointments = user.appointments.map(async appointmentId => getAppointmentById(appointmentId));
+
+    return Promise.all(getAppointments)
+      .then((appointments) => appointments);
+  }
+
   async function createAppointment(appointment) {
     await appointmentRepository.add(appointment);
   }
@@ -14,6 +21,7 @@ function create(appointmentRepository) {
 
   return {
     getAppointmentById,
+    getUserAppointments,
     createAppointment,
     createAppointments
   };

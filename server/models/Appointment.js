@@ -1,8 +1,6 @@
 // @flow
 
 const mongooseModel = require('mongoose').model;
-const Creator = require('./Creator');
-const Subscriber = require('./Subscriber');
 const userFactory = require('../factories/userFactory');
 
 class Appointment {
