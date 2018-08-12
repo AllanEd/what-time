@@ -7,6 +7,7 @@ const loginRoute = require('./routes/login');
 const userRoute = require('./routes/user');
 const userIdRoute = require('./routes/userId');
 const appointmentRoute = require('./routes/appointment');
+const appointmentRouteId = require('./routes/appointment');
 const weekRoute = require('./routes/week');
 const dayRoute = require('./routes/day');
 const errorRoute = require('./routes/error');
@@ -24,6 +25,7 @@ module.exports = services => {
   const user = userRoute.create(services);
   const userId = userIdRoute.create();
   const appointment = appointmentRoute.create(services);
+  const appointmentId = appointmentRouteId.create(services);
   const week = weekRoute.create(services);
   const day = dayRoute.create(services);
 
@@ -34,7 +36,8 @@ module.exports = services => {
   app.use('/login', login);
   app.use('/users', user);
   app.use('/users/:userId', userId);
-  app.use('/users/appointments', appointment);
+  app.use('/users/:userId/appointments', appointment);
+  app.use('/users/appointments/:appointmentId', appointmentId);
   app.use('/users/:userId/weeks/:appointmentId/weeks', week);
   app.use('/days', day);
   app.use(errorRoute);
