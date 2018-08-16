@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const DayModel = require('../../models/Day');
 
 const { Schema } = mongoose;
 
@@ -12,5 +13,9 @@ const daySchema = new Schema({
 });
 
 const Day = mongoose.model('Day', daySchema);
+
+Day.prototype.toDayModel = function toDayModel() {
+  return new DayModel(this);
+};
 
 module.exports = Day;

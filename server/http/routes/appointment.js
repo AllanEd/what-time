@@ -3,7 +3,7 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 const router = express.Router();
 
-function create({ appointmentService, weekService }) {
+function create({ appointmentService, weekService, dayService }) {
   router.param(
     'appointmentId', 
     async (req, res, next, id) => {
@@ -49,6 +49,16 @@ function create({ appointmentService, weekService }) {
       const {week} = req;
       
       res.json(week);
+    }),
+  );
+
+  router.get(
+    '/:appointmentId/weeks/:weekId/days',
+    asyncWrapper(async (req, res) => {
+      const {week} = req;
+      const days = await dayService.getDays(week);
+      
+      res.json(days);
     }),
   );
 

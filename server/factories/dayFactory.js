@@ -17,6 +17,21 @@ function makeDays(days) {
   return formattedDays;
 }
 
+function makeTimeslots(timeslots) {
+  const jsonTimeslots = timeslots.toJSON();
+  const formattedTimeslots = {};
+
+  Object.keys(jsonTimeslots).forEach(key => {
+    formattedTimeslots[key] = [];
+    jsonTimeslots[key].forEach(objectId => {
+      formattedTimeslots[key].push(objectId.toJSON());
+    });
+  });
+
+  return jsonTimeslots;
+}
+
 module.exports = {
-  makeDays
+  makeDays,
+  makeTimeslots
 };
