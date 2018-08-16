@@ -7,7 +7,7 @@ function create({ Appointment }) {
   }
 
   async function getByUserId(userId) {
-    const appointments = await Appointment.find({ $or:[ {'creator': userId}, {'subscribers': userId} ]}).populate(populate).exec();
+    const appointments = await Appointment.find({ $or:[ {'owner': userId}, {'subscribers': userId} ]}).populate(populate).exec();
     return appointments.map(appointment => appointment.toAppointmentModel());
   }
   

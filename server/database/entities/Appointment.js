@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const appointmentSchema = new Schema({
   title: String,
-  creator: {type: Schema.Types.ObjectId, ref: 'User'},
+  owner: {type: Schema.Types.ObjectId, ref: 'User'},
   subscribers: [{type: Schema.Types.ObjectId, ref: 'User'}],
   startDate: Date,
   isDone: Boolean,

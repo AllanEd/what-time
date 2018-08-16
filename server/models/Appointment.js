@@ -12,7 +12,7 @@ class Appointment {
   
   startDate: Date;
 
-  creator: Object;
+  owner: Object;
 
   subscribers: Array<Object>;
 
@@ -23,7 +23,7 @@ class Appointment {
     this.title = appointmentData.title;
     this.isDone = appointmentData.isDone;
     this.startDate = appointmentData.startDate;
-    this.creator = User.factory.makeCreator(appointmentData.creator);
+    this.owner = User.factory.makeOwner(appointmentData.owner);
     this.subscribers = User.factory.makeSubscribers(appointmentData.subscribers);
     this.weeks = Week.factory.makeWeeks(appointmentData.weeks);
   }

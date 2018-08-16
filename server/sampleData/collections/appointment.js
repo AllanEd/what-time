@@ -16,7 +16,7 @@ const appointments = [{
     ObjectId('5b64a1d8bb4b5d57d8566127'),
   ],
   title: 'Appointment 1',
-  creator: ObjectId('5b64a1d8bb4b5d57d8566124'),
+  owner: ObjectId('5b64a1d8bb4b5d57d8566124'),
   startDate: new Date('2018-08-06T12:41:04.588Z'),
   isDone: true,
   __v: 0,

@@ -1,6 +1,6 @@
 module.exports = [
   { 
-    path: 'creator',
+    path: 'owner',
     select: 'name'
   }, {
     path: 'subscribers',

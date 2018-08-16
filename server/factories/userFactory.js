@@ -1,4 +1,4 @@
-function makeCreator(userData) {
+function makeOwner(userData) {
   return {
     id: userData.id,
     name: userData.name
@@ -17,6 +17,6 @@ function makeSubscribers(subscribers) {
 };
 
 module.exports = {
-  makeCreator,
+  makeOwner,
   makeSubscribers
 };
