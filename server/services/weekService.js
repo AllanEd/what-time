@@ -1,6 +1,7 @@
 function create(weekRepository) {
-  async function getAllWeeks() {
-    const weeks = await weekRepository.getAll();
+  async function getWeeks(appointment) {
+    const weekIds = appointment.weeks.map(week => week.id);
+    const weeks = await weekRepository.getByIds(weekIds);
     return weeks;
   }
 
@@ -9,7 +10,7 @@ function create(weekRepository) {
   }
 
   return {
-    getAllWeeks,
+    getWeeks,
     createWeeks
   };
 }

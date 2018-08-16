@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const WeekModel = require('../../models/Week');
 
 const { Schema } = mongoose;
 
@@ -17,5 +18,9 @@ const weekSchema = new Schema({
 });
 
 const Week = mongoose.model('Week', weekSchema);
+
+Week.prototype.toWeekModel = function toWeekModel() {
+  return new WeekModel(this);
+};
 
 module.exports = Week;

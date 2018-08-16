@@ -10,7 +10,8 @@ module.exports = [
     select: ['startDate', 'subscribers'],
     populate:
     {
-      path: 'subscribers'
+      path: 'subscribers',
+      select: 'name'
     }
   }
 ]

@@ -1,5 +1,7 @@
 // @flow
 
+const User = require('./User');
+const Day = require('../models/Day');
 const weekFactory = require('../factories/weekFactory');
 
 class Week {
@@ -7,15 +9,17 @@ class Week {
 
   startDate: Date;
 
+  days: Object;
+
+  subscribers: Array<Object>;
+
   static factory: Object;
 
-  constructor(id: string, startDate: Date) {
-    this.id = id;
-    this.startDate = startDate;
-  }
-
-  static createWeeks(weeks: Array<Object>): Array<Object> {
-    return weeks.map(week => new Week(week.id, week.startDate));
+  constructor(weekData: Object) {
+    this.id = weekData.id;
+    this.startDate = weekData.startDate;
+    this.days = Day.factory.makeDays(weekData.days);
+    this.subscribers = User.factory.makeSubscribers(weekData.subscribers);
   }
 }
 
