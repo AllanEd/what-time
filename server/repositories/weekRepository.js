@@ -1,6 +1,11 @@
 const populate = require('./populate/week');
 
 function create({ Week }) {
+  async function getById(id) {
+    const week = await Week.findById(id).populate(populate);
+    return week.toWeekModel();
+  }
+
   async function getByIds(ids) {
     const weeks = await Week.find({'_id': { $in: ids}}).populate(populate);
     
@@ -12,6 +17,7 @@ function create({ Week }) {
   }
 
   return {
+    getById,
     getByIds,
     addMany
   };

@@ -2,7 +2,7 @@ const populate = require('./populate/appointment');
 
 function create({ Appointment }) {
   async function getById(id) {
-    const appointment = await Appointment.findById(id).populate(populate).exec();
+    const appointment = await Appointment.findById(id).populate(populate);
     return appointment.toAppointmentModel();
   }
 
@@ -13,7 +13,7 @@ function create({ Appointment }) {
   }
 
   async function getByUserId(userId) {
-    const appointments = await Appointment.find({ $or:[ {'owner': userId}, {'subscribers': userId} ]}).populate(populate).exec();
+    const appointments = await Appointment.find({ $or:[ {'owner': userId}, {'subscribers': userId} ]}).populate(populate);
     return appointments.map(appointment => appointment.toAppointmentModel());
   }
   

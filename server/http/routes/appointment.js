@@ -14,6 +14,16 @@ function create({ appointmentService, weekService }) {
     },
   );
 
+  router.param(
+    'weekId', 
+    async (req, res, next, id) => {
+      const week = await weekService.getWeek(id);
+      req.week = week;
+
+      next();
+    },
+  );
+
   router.get(
     '/:appointmentId',
     asyncWrapper(async (req, res) => {
@@ -30,6 +40,15 @@ function create({ appointmentService, weekService }) {
       const weeks = await weekService.getWeeks(appointment);
       
       res.json(weeks);
+    }),
+  );
+
+  router.get(
+    '/:appointmentId/weeks/:weekId',
+    asyncWrapper(async (req, res) => {
+      const {week} = req;
+      
+      res.json(week);
     }),
   );
 
