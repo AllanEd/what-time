@@ -3,7 +3,7 @@ const asyncWrapper = require('../utils/asyncWrapper');
 
 const router = express.Router();
 
-function create({ userService }) {
+function create({ userService, userAppointmentService }) {
   router.param(
     'userId', 
     async (req, res, next, id) => {
@@ -30,21 +30,13 @@ function create({ userService }) {
     }),
   );
 
-  router.post(
-    '/',
+  router.get(
+    '/:userId/appointments',
     asyncWrapper(async (req, res) => {
-      const user = req.body;
-      await userService.createUser(user);
-      res.json({});
-    }),
-  );
-
-  router.post(
-    '/',
-    asyncWrapper(async (req, res) => {
-      const users = req.body;
-      await userService.createSubscribers(users);
-      res.json({});
+      const {id} = req;
+      const user = await userAppointmentService.getUserAppointments(id);
+      
+      res.json(user);
     }),
   );
 

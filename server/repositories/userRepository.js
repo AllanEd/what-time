@@ -22,7 +22,7 @@ function create({ User }) {
     return user.toUserModel();
   }
 
-
+  
   return {
     getAll,
     add,

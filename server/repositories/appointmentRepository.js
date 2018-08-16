@@ -6,6 +6,12 @@ function create({ Appointment }) {
     return appointment.toAppointmentModel();
   }
 
+  async function getByIds(ids) {
+    const appointments = await Appointment.find({'_id': { $in: ids}}).populate(populate);
+    
+    return appointments.map(appointment => appointment.toAppointmentModel());
+  }
+
   async function getByUserId(userId) {
     const appointments = await Appointment.find({ $or:[ {'owner': userId}, {'subscribers': userId} ]}).populate(populate).exec();
     return appointments.map(appointment => appointment.toAppointmentModel());
@@ -21,6 +27,7 @@ function create({ Appointment }) {
 
   return {
     getById,
+    getByIds,
     getByUserId,
     add,
     addMany
