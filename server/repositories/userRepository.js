@@ -13,14 +13,24 @@ function create({ User }) {
     await User.insertMany(users);
   }
 
-  async function findByName(name) {
+  async function getById(id) {
+    const user = await User.findById(id);
+    return user.toUserModel();
+  }
+
+  async function getByName(name) {
     const user = await User.where({name}).findOne().exec();
     return user.toUserModel();
   }
 
-  async function getById(id) {
-    const user = await User.findById(id);
-    return user.toUserModel();
+  async function getByEmail(email) {
+    const user = await User.findOne({email});
+
+    if (user) {
+      return user.toUserModel();
+    } 
+
+    throw new Error("User with given Email does not exists");
   }
 
   async function updateUserById(id, updateData) {
@@ -33,8 +43,9 @@ function create({ User }) {
     getAll,
     add,
     addMany,
-    findByName,
     getById,
+    getByName,
+    getByEmail,
     updateUserById
   };
 }
