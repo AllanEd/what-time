@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 function create(userRepository) {
   async function getAllUsers() {
     const users = await userRepository.getAll();
@@ -64,9 +66,10 @@ function create(userRepository) {
   };
 
   async function registerUser(name, password, email) {
+    const saltRounds = 10;
     const newUserData = {
       name,
-      password,
+      password: bcrypt.hashSync(password, saltRounds),
       email,
       registered: new Date(),
       lastLogin: new Date()
