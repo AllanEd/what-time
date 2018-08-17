@@ -57,9 +57,11 @@ function create({ userService, userAppointmentService }) {
     '/register',
     asyncWrapper(async (req, res) => {
       const {name} = req.body;
+      const {password} = req.body;
       const {email} = req.body;
-      const login = await userService.verifyUser(username, password);
-      res.json(login);
+      const registeredUser = await userService.registerUser(name, password, email);
+
+      res.json(registeredUser);
     }),
   );
   

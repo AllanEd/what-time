@@ -45,13 +45,13 @@ function create(userRepository) {
   }
   
 
-  async function verifyUser(username, password) {
+  async function verifyUser(name, password) {
 
-    if (!username || !password) {
-      return "You need a username and password";
+    if (!name || !password) {
+      return "You need a name and password";
     }
 
-    const user = await getUserByName(username);
+    const user = await getUserByName(name);
 
     const userExists = user !== undefined;
     let isPasswordValid = false;
@@ -59,7 +59,7 @@ function create(userRepository) {
     if (userExists) {
       isPasswordValid = user.isPasswordValid(password);
     } else {
-      return "No user with the given username";
+      return "No user with the given name";
     }
 
     if (isPasswordValid) {
@@ -70,6 +70,20 @@ function create(userRepository) {
     return "Wrong password";
   };
 
+  async function registerUser(name, password, email) {
+    const newUserData = {
+      name,
+      password,
+      email,
+      registered: new Date(),
+      lastLogin: new Date()
+    }
+
+    const newUser = await userRepository.add(newUserData);
+    return newUser;
+  }
+
+
   return {
     createUser,
     getAllUsers,
@@ -77,7 +91,8 @@ function create(userRepository) {
     createSubscribers,
     updateLastLogin,
     getUserByName,
-    verifyUser
+    verifyUser,
+    registerUser
   };
 }
 

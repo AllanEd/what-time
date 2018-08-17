@@ -5,7 +5,8 @@ function create({ User }) {
   }
 
   async function add(user) {
-    await User.build(user).save();
+    const createdUser = await User.create(user);
+    return createdUser.toUserModel();
   }
 
   async function addMany(users) {
