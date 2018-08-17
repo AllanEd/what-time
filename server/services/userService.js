@@ -21,7 +21,7 @@ function create(userRepository) {
     await userRepository.add(user);
   }
 
-  async function createSubscribers(users) {
+  async function createUsers(users) {
     await userRepository.addMany(users);
   }
 
@@ -113,7 +113,8 @@ function create(userRepository) {
     createUser,
     getAllUsers,
     getUser,
-    createSubscribers,
+    editUser,
+    createUsers,
     updateLastLogin,
     getUserByName,
     verifyUser,
