@@ -8,7 +8,7 @@ class User {
 
   name: string;
 
-  password: string;
+  getPassword: Function;
 
   email: string;
 
@@ -19,13 +19,15 @@ class User {
   constructor(userData: Object) {
     this.id = userData.id;
     this.name = userData.name;
-    this.password = userData.password;
     this.email = userData.email;
     this.appointments = this.constructor.obejctIdsToString(userData.appointments)
+
+    const {password} = userData;
+    this.getPassword = () => password;
   }
 
-  isPasswordValid(password: string): boolean {
-    return bcrypt.compareSync(password, this.password);
+  isPasswordValid(passwordEntry: string): boolean {
+    return bcrypt.compareSync(passwordEntry, this.getPassword());
   };
 
   static obejctIdsToString(objectIds: Array<Object>): Array<string> {
