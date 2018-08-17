@@ -63,7 +63,6 @@ function create(userRepository) {
     }
 
     if (isPasswordValid) {
-      delete user.password
       return user;
     } 
       

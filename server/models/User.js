@@ -31,6 +31,10 @@ class User {
   };
 
   static obejctIdsToString(objectIds: Array<Object>): Array<string> {
+    if (objectIds === undefined) {
+      return [];
+    }
+    
     return objectIds.map(objectId => objectId.toString());
   }
 }
