@@ -3,6 +3,11 @@ function create(appointmentRepository) {
     const appointments = await appointmentRepository.getById(id);
     return appointments;
   }
+
+  async function getAppointments(ids) {
+    const appointments = await appointmentRepository.getByIds(ids);
+    return appointments; 
+  }
   
   async function createAppointment(appointment) {
     await appointmentRepository.add(appointment);
@@ -14,6 +19,7 @@ function create(appointmentRepository) {
 
   return {
     getAppointment,
+    getAppointments,
     createAppointment,
     createAppointments
   };
