@@ -26,7 +26,7 @@ describe('user route test', () => {
 
       const { body: users } = await request(app)
         .post('/users/login')
-        .send({ username: 'Alex', password: 'test' })
+        .send({ name: 'Alex', password: 'test' })
         .expect('Content-Type', /json/)
         .expect(200);
 
@@ -40,7 +40,7 @@ describe('user route test', () => {
 
       const { body } = await request(app)
         .post('/users/login')
-        .send({ username: '', password: 'teste' })
+        .send({ name: '', password: 'teste' })
         .expect('Content-Type', /json/)
         .expect(500);
 
