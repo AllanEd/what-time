@@ -42,6 +42,16 @@ function create({ userService, appointmentService }) {
     }),
   );
 
+  router.delete(
+    '/:userId',
+    asyncWrapper(async (req, res) => {
+      const {user} = req;
+      const deletedUser = await userService.deleteUser(user);
+
+      res.json(deletedUser);
+    }),
+  );
+
   router.get(
     '/:userId/appointments',
     asyncWrapper(async (req, res) => {

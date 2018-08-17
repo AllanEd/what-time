@@ -33,6 +33,11 @@ function create({ User }) {
     return user.toUserModel();
   }
 
+  async function deleteUserById(id) {
+    const user = await User.findByIdAndDelete(id);
+    return user.toUserModel();
+  }
+
   
   return {
     add,
@@ -40,7 +45,8 @@ function create({ User }) {
     getById,
     getByName,
     getByEmail,
-    updateUserById
+    updateUserById,
+    deleteUserById
   };
 }
 

@@ -44,6 +44,12 @@ function create(userRepository) {
     return updatedUser;
   }
 
+  async function deleteUser(user) {
+    const {id} = user;
+    const updatedUser = await userRepository.deleteUserById(id);
+    return updatedUser;
+  }
+
   async function updateLastLogin(user) {
     const userIsObject = typeof user === 'object';
     const userId = userIsObject ? user.id : undefined;
@@ -115,6 +121,7 @@ function create(userRepository) {
     getUserByName,
     createUser,
     createUsers,
+    deleteUser,
     editUser,
     updateLastLogin,
     verifyUser,
