@@ -40,6 +40,16 @@ function create({ userService, userAppointmentService }) {
     }),
   );
 
+  router.post(
+    '/login',
+    asyncWrapper(async (req, res) => {
+      const {username} = req.body;
+      const {password} = req.body;
+      const login = await userService.verifyUser(username, password);
+      res.json(login);
+    }),
+  );
+  
   return router;
 }
 
