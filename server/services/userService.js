@@ -1,24 +1,17 @@
 const bcrypt = require('bcrypt');
-const isEmail = require('validator/lib/isEmail');
 const isEmpty = require('validator/lib/isEmpty');
 
-function create(userRepository) {
-  function validateInput(inputData) {
-    if (isEmail(inputData.email) === false) {
-      throw new Error("Invalid Email");
+const requiredFields = (inputData) => {
+  Object.keys(inputData).forEach(key => {
+    if (inputData[key] === undefined) {
+      throw new Error("Not all Data is given");
+    } else if (isEmpty(inputData[key])) {
+      throw new Error("Not all Data is given");
     }
-  }
+  });
+}
 
-  function requiredFields(inputData) {
-    Object.keys(inputData).forEach(key => {
-      if (inputData[key] === undefined) {
-        throw new Error("Not all Data is given");
-      } else if (isEmpty(inputData[key])) {
-        throw new Error("Not all Data is given");
-      }
-    });
-  }
-
+function create(userRepository) {
   async function getAllUsers() {
     const users = await userRepository.getAll();
     return users;
@@ -94,7 +87,6 @@ function create(userRepository) {
   }
 
   async function registerUser(name, password, email) {
-    validateInput({email});
     requiredFields({name, password, email});
 
     const emailAlreadyExists = await doesEmailExists(email);
