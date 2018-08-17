@@ -1,34 +1,32 @@
-const User = require('../models/User');
+function makeDays(mongooseDayModel) {
+  const mongooseDayModelJson = mongooseDayModel.toJSON();
+  const days = {};
 
-function makeDays(days) {
-  const jsonDays = days.toJSON();
-  const formattedDays = {};
+  Object.keys(mongooseDayModelJson).forEach(key => {
+    const day = mongooseDayModelJson[key];
 
-  Object.keys(jsonDays).forEach(key => {
-    const day = jsonDays[key];
-
-    formattedDays[key] = {
+    days[key] = {
       id: day.id,
       date: day.date,
-      subscribers: User.factory.makeSubscribers(day.subscribers)
+      subscribers: day.subscribers.toBSON().map(id => id.toJSON())
     }
   });
 
-  return formattedDays;
+  return days;
 }
 
-function makeTimeslots(timeslots) {
-  const jsonTimeslots = timeslots.toJSON();
-  const formattedTimeslots = {};
+function makeTimeslots(mongooseTimeslotsMap) {
+  const mongooseTimeslotsMapJson = mongooseTimeslotsMap.toJSON();
+  const timeslots = {};
 
-  Object.keys(jsonTimeslots).forEach(key => {
-    formattedTimeslots[key] = [];
-    jsonTimeslots[key].forEach(objectId => {
-      formattedTimeslots[key].push(objectId.toJSON());
+  Object.keys(mongooseTimeslotsMapJson).forEach(key => {
+    timeslots[key] = [];
+    mongooseTimeslotsMapJson[key].forEach(objectId => {
+      timeslots[key].push(objectId.toJSON());
     });
   });
 
-  return jsonTimeslots;
+  return timeslots;
 }
 
 module.exports = {

@@ -8,10 +8,5 @@ module.exports = [
   }, { 
     path: 'weeks',
     select: ['startDate', 'subscribers'],
-    populate:
-    {
-      path: 'subscribers',
-      select: 'name'
-    }
   }
 ]

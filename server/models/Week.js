@@ -1,6 +1,5 @@
 // @flow
 
-const User = require('./User');
 const Day = require('../models/Day');
 const weekFactory = require('../factories/weekFactory');
 
@@ -19,7 +18,7 @@ class Week {
     this.id = weekData.id;
     this.startDate = weekData.startDate;
     this.days = Day.factory.makeDays(weekData.days);
-    this.subscribers = User.factory.makeSubscribers(weekData.subscribers);
+    this.subscribers = weekData.subscribers.toBSON().map(id => id.toJSON());
   }
 }
 
