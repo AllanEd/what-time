@@ -10,7 +10,6 @@ const { userService } = services;
 const app = require('../../server/http/app')(services);
 
 const userData = require('../data/user').users;
-const errorData = require('../data/error');
 
 describe('user route test', () => {
   describe('POST /users/login test', () => {
@@ -34,10 +33,10 @@ describe('user route test', () => {
       expect(users).to.eql(userData);
     });
 
-    it('500 -> no Username given', async () => {
-      const errorMessage = errorData.noUserName;
+    it('should return 500 when the service rejects with an error', async () => {
+      const errorMessage = new Error('Error from User Service');
 
-      userService.verifyUser.rejects(new Error(errorMessage.error));
+      userService.verifyUser.rejects(errorMessage);
 
       const { body } = await request(app)
         .post('/users/login')
@@ -45,49 +44,7 @@ describe('user route test', () => {
         .expect('Content-Type', /json/)
         .expect(500);
 
-      expect(body).to.eql(errorMessage);
-    });
-
-    it('500 -> no Password given', async () => {
-      const errorMessage = errorData.noPassword;
-
-      userService.verifyUser.rejects(new Error(errorMessage.error));
-
-      const { body } = await request(app)
-        .post('/users/login')
-        .send({ username: 'Alex', password: '' })
-        .expect('Content-Type', /json/)
-        .expect(500);
-
-      expect(body).to.eql(errorMessage);
-    });
-
-    it('500 -> Username or Password incorrect', async () => {
-      const errorMessage = errorData.wrongUserName;
-
-      userService.verifyUser.rejects(new Error(errorMessage.error));
-
-      const { body } = await request(app)
-        .post('/users/login')
-        .send({ username: '', password: '' })
-        .expect('Content-Type', /json/)
-        .expect(500);
-
-      expect(body).to.eql(errorMessage);
-    });
-
-    it('500 -> Wrong password', async () => {
-      const errorMessage = errorData.wrongPassword;
-
-      userService.verifyUser.rejects(new Error(errorMessage.error));
-
-      const { body } = await request(app)
-        .post('/users/login')
-        .send({ username: '', password: '' })
-        .expect('Content-Type', /json/)
-        .expect(500);
-
-      expect(body).to.eql(errorMessage);
+      expect(body.error).to.eql(errorMessage.message);
     });
   });
 });
