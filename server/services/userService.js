@@ -38,7 +38,7 @@ function create(userRepository) {
     try {
       user = await userRepository.findByName(name);
     } catch(error) {
-      console.error(error);
+      throw new Error("No user with the given name");
     }
 
     return user;
@@ -47,26 +47,20 @@ function create(userRepository) {
 
   async function verifyUser(name, password) {
 
-    if (!name || !password) {
-      return "You need a name and password";
+    if (!name || name.length === 0 || !password || password.length === 0) {
+      throw new Error("You need a name and password");
     }
 
     const user = await getUserByName(name);
-
-    const userExists = user !== undefined;
     let isPasswordValid = false;
 
-    if (userExists) {
-      isPasswordValid = user.isPasswordValid(password);
-    } else {
-      return "No user with the given name";
-    }
+    isPasswordValid = user.isPasswordValid(password);
 
     if (isPasswordValid) {
       return user;
     } 
       
-    return "Wrong password";
+    throw new Error("Wrong password");
   };
 
   async function registerUser(name, password, email) {
