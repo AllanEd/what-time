@@ -1,9 +1,4 @@
 function create({ User }) {
-  async function getAll() {
-    const users = await User.find();
-    return users.map(user => user.toUserModel());
-  }
-
   async function add(user) {
     const createdUser = await User.create(user);
     return createdUser.toUserModel();
@@ -34,13 +29,12 @@ function create({ User }) {
   }
 
   async function updateUserById(id, updateData) {
-    const user = await User.findByIdAndUpdate(id, updateData)
+    const user = await User.findByIdAndUpdate(id, updateData, {new: true});
     return user.toUserModel();
   }
 
   
   return {
-    getAll,
     add,
     addMany,
     getById,

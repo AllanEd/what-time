@@ -31,6 +31,17 @@ function create({ userService, appointmentService }) {
     }),
   );
 
+  router.patch(
+    '/:userId',
+    asyncWrapper(async (req, res) => {
+      const {body} = req;
+      const {user} = req;
+      const registeredUser = await userService.editUser(user, body);
+
+      res.json(registeredUser);
+    }),
+  );
+
   router.get(
     '/:userId/appointments',
     asyncWrapper(async (req, res) => {

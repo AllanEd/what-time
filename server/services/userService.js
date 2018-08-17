@@ -12,11 +12,23 @@ const requiredFields = (inputData) => {
 }
 
 function create(userRepository) {
-  async function getAllUsers() {
-    const users = await userRepository.getAll();
-    return users;
+  async function getUser(id) {
+    const user = await userRepository.getById(id);
+    return user;
   }
 
+  async function getUserByName(name) {
+    let user;
+
+    try {
+      user = await userRepository.getByName(name);
+    } catch(error) {
+      throw new Error("No user with the given name");
+    }
+
+    return user;
+  }
+  
   async function createUser(user) {
     await userRepository.add(user);
   }
@@ -25,9 +37,11 @@ function create(userRepository) {
     await userRepository.addMany(users);
   }
 
-  async function getUser(id) {
-    const user = await userRepository.getById(id);
-    return user;
+  async function editUser(user, requestData) {
+    const {id} = user;
+    const mergedUser = Object.assign(user, requestData);
+    const updatedUser = await userRepository.updateUserById(id, mergedUser);
+    return updatedUser;
   }
 
   async function updateLastLogin(user) {
@@ -44,19 +58,6 @@ function create(userRepository) {
 
     userRepository.updateUserById(userId, updateData);
   }
-
-  async function getUserByName(name) {
-    let user;
-
-    try {
-      user = await userRepository.getByName(name);
-    } catch(error) {
-      throw new Error("No user with the given name");
-    }
-
-    return user;
-  }
-  
 
   async function verifyUser(name, password) {
     requiredFields({name, password});
@@ -110,13 +111,12 @@ function create(userRepository) {
 
   
   return {
-    createUser,
-    getAllUsers,
     getUser,
-    editUser,
-    createUsers,
-    updateLastLogin,
     getUserByName,
+    createUser,
+    createUsers,
+    editUser,
+    updateLastLogin,
     verifyUser,
     registerUser
   };
