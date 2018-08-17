@@ -22,13 +22,19 @@ function create({ User }) {
     return user.toUserModel();
   }
 
+  async function updateUserById(id, updateData) {
+    const user = await User.findByIdAndUpdate(id, updateData)
+    return user.toUserModel();
+  }
+
   
   return {
     getAll,
     add,
     addMany,
     findByName,
-    getById
+    getById,
+    updateUserById
   };
 }
 

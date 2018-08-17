@@ -46,6 +46,19 @@ function create({ userService, userAppointmentService }) {
       const {username} = req.body;
       const {password} = req.body;
       const login = await userService.verifyUser(username, password);
+      
+      userService.updateLastLogin(login);
+      
+      res.json(login);
+    }),
+  );
+
+  router.post(
+    '/register',
+    asyncWrapper(async (req, res) => {
+      const {name} = req.body;
+      const {email} = req.body;
+      const login = await userService.verifyUser(username, password);
       res.json(login);
     }),
   );

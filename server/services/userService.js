@@ -17,6 +17,21 @@ function create(userRepository) {
     return user;
   }
 
+  async function updateLastLogin(user) {
+    const userIsObject = typeof user === 'object';
+    const userId = userIsObject ? user.id : undefined;
+
+    if (userId === undefined) {
+      return;
+    }
+
+    const updateData = {
+      lastLogin: new Date()
+    };
+
+    userRepository.updateUserById(userId, updateData);
+  }
+
   async function getUserByName(name) {
     let user;
 
@@ -28,6 +43,7 @@ function create(userRepository) {
 
     return user;
   }
+  
 
   async function verifyUser(username, password) {
 
@@ -59,6 +75,7 @@ function create(userRepository) {
     getAllUsers,
     getUser,
     createSubscribers,
+    updateLastLogin,
     getUserByName,
     verifyUser
   };

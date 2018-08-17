@@ -8,7 +8,7 @@ const userSchema = new Schema({
   password: String,
   email: String,
   registered: Date,
-  lastSignIn: Date,
+  lastLogin: Date,
   appointments: [{type: Schema.Types.ObjectId, ref: 'Appointment'}],
 });
 
