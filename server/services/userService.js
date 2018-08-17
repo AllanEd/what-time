@@ -66,10 +66,7 @@ function create(userRepository) {
   
 
   async function verifyUser(name, password) {
-
-    if (!name || name.length === 0 || !password || password.length === 0) {
-      throw new Error("You need a name and password");
-    }
+    requiredFields({name, password});
 
     const user = await getUserByName(name);
     let isPasswordValid = false;
