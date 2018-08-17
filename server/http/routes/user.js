@@ -1,11 +1,12 @@
 const express = require('express');
 const asyncWrapper = require('../utils/asyncWrapper');
+const authentication = require('../utils/authentication');
 
 const router = express.Router();
 
 function create({ userService, appointmentService }) {
   router.param(
-    'userId', 
+    'userId',
     async (req, res, next, id) => {
       const user = await userService.getUser(id);
       req.user = user;
@@ -25,8 +26,8 @@ function create({ userService, appointmentService }) {
   router.get(
     '/:userId',
     asyncWrapper(async (req, res) => {
-      const {user} = req;
-      
+      const { user } = req;
+
       res.json(user);
     }),
   );
@@ -34,8 +35,8 @@ function create({ userService, appointmentService }) {
   router.patch(
     '/:userId',
     asyncWrapper(async (req, res) => {
-      const {body} = req;
-      const {user} = req;
+      const { body } = req;
+      const { user } = req;
       const registeredUser = await userService.editUser(user, body);
 
       res.json(registeredUser);
@@ -45,7 +46,7 @@ function create({ userService, appointmentService }) {
   router.delete(
     '/:userId',
     asyncWrapper(async (req, res) => {
-      const {user} = req;
+      const { user } = req;
       const deletedUser = await userService.deleteUser(user);
 
       res.json(deletedUser);
@@ -55,9 +56,9 @@ function create({ userService, appointmentService }) {
   router.get(
     '/:userId/appointments',
     asyncWrapper(async (req, res) => {
-      const {appointments} = req.user;
+      const { appointments } = req.user;
       const user = await appointmentService.getAppointments(appointments);
-      
+
       res.json(user);
     }),
   );
@@ -65,28 +66,38 @@ function create({ userService, appointmentService }) {
   router.post(
     '/login',
     asyncWrapper(async (req, res) => {
-      const {name} = req.body;
-      const {password} = req.body;
-      const login = await userService.verifyUser(name, password);
-      
-      userService.updateLastLogin(login);
-      
-      res.json(login);
+      const { name } = req.body;
+      const { password } = req.body;
+      const loginUser = await userService.verifyUser(name, password);
+
+      userService.updateLastLogin(loginUser);
+
+      const token = authentication.sign({ id: loginUser.id });
+
+      res.json({
+        data: loginUser,
+        token,
+      });
     }),
   );
 
   router.post(
     '/register',
     asyncWrapper(async (req, res) => {
-      const {name} = req.body;
-      const {password} = req.body;
-      const {email} = req.body;
+      const { name } = req.body;
+      const { password } = req.body;
+      const { email } = req.body;
       const registeredUser = await userService.registerUser(name, password, email);
 
-      res.json(registeredUser);
+      const token = authentication.sign({ id: registeredUser.id });
+
+      res.json({
+        data: registeredUser,
+        token,
+      });
     }),
   );
-  
+
   return router;
 }
 
