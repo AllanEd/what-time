@@ -7,9 +7,16 @@ const router = express.Router();
 function create({ userService, appointmentService }) {
   router.param(
     'userId',
-    async (req, res, next, id) => {
-      const user = await userService.getUser(id);
-      req.user = user;
+    async (req, res, next, requestedId) => {
+      const { authorized } = req;
+      const authenticationId = req.authentication ? req.authentication.id : undefined;
+
+      if (authorized && requestedId === authenticationId) {
+        const user = await userService.getUser(requestedId);
+        req.user = user;
+      } else {
+        throw new Error('You are not authorized');
+      }
 
       next();
     },

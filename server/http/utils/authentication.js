@@ -16,8 +16,16 @@ function sign(payload) {
 }
 
 function verify(req, res, next) {
-  if (req.path !== '/users/register') {
-    jwt.verify(req.headers.authorization, publicKey, options);
+  if (req.headers.authorization) {
+    try {
+      req.authentication = jwt.verify(req.headers.authorization, publicKey, options);
+      req.authorized = true;
+    } catch (err) {
+      console.error(err);
+      req.authorized = false;
+    }
+  } else {
+    req.authorized = false;
   }
 
   next();
