@@ -8,17 +8,14 @@ function create({ userService, appointmentService }) {
   router.param(
     'userId',
     async (req, res, next, requestedId) => {
-      const { authorized } = req;
-      const authenticationId = req.authentication ? req.authentication.id : undefined;
-
-      if (authorized && requestedId === authenticationId) {
+      try {
+        authentication.verifyAuthentication(req, requestedId, next);
         const user = await userService.getUser(requestedId);
         req.user = user;
-      } else {
-        throw new Error('You are not authorized');
+        next();
+      } catch (err) {
+        next(err);
       }
-
-      next();
     },
   );
 

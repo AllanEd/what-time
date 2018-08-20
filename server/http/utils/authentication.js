@@ -31,6 +31,15 @@ function verify(req, res, next) {
   next();
 }
 
+function verifyAuthentication(req, requestedId) {
+  const { authorized } = req;
+  const authenticationId = req.authentication ? req.authentication.id : undefined;
+
+  if (!authorized || requestedId !== authenticationId) {
+    throw new Error('You are not authorized');
+  }
+}
+
 function decode(token) {
   jwt.decode(token, { complete: true });
 }
@@ -39,4 +48,5 @@ module.exports = {
   sign,
   verify,
   decode,
+  verifyAuthentication,
 };
