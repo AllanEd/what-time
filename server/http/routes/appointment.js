@@ -5,7 +5,7 @@ const router = express.Router();
 
 function create({ appointmentService, weekService, dayService }) {
   router.param(
-    'appointmentId', 
+    'appointmentId',
     async (req, res, next, id) => {
       const appointment = await appointmentService.getAppointment(id);
       req.appointment = appointment;
@@ -15,7 +15,7 @@ function create({ appointmentService, weekService, dayService }) {
   );
 
   router.param(
-    'weekId', 
+    'weekId',
     async (req, res, next, id) => {
       const week = await weekService.getWeek(id);
       req.week = week;
@@ -27,8 +27,8 @@ function create({ appointmentService, weekService, dayService }) {
   router.get(
     '/:appointmentId',
     asyncWrapper(async (req, res) => {
-      const {appointment} = req;
-      
+      const { appointment } = req;
+
       res.json(appointment);
     }),
   );
@@ -36,9 +36,9 @@ function create({ appointmentService, weekService, dayService }) {
   router.get(
     '/:appointmentId/weeks',
     asyncWrapper(async (req, res) => {
-      const {appointment} = req;
+      const { appointment } = req;
       const weeks = await weekService.getWeeks(appointment);
-      
+
       res.json(weeks);
     }),
   );
@@ -46,8 +46,8 @@ function create({ appointmentService, weekService, dayService }) {
   router.get(
     '/:appointmentId/weeks/:weekId',
     asyncWrapper(async (req, res) => {
-      const {week} = req;
-      
+      const { week } = req;
+
       res.json(week);
     }),
   );
@@ -55,9 +55,9 @@ function create({ appointmentService, weekService, dayService }) {
   router.get(
     '/:appointmentId/weeks/:weekId/days',
     asyncWrapper(async (req, res) => {
-      const {week} = req;
+      const { week } = req;
       const days = await dayService.getDays(week);
-      
+
       res.json(days);
     }),
   );

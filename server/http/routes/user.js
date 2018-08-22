@@ -5,30 +5,24 @@ const authentication = require('../utils/authentication');
 const router = express.Router();
 
 function create({ userService, appointmentService }) {
-  router.param(
-    'userId',
-    async (req, res, next, requestedId) => {
-      try {
-        authentication.verifyAuthentication(req, requestedId, next);
-        const user = await userService.getUser(requestedId);
-        req.user = user;
+  router.all(
+    '*',
+    async (req, res, next) => {
+      if (!req.authentication) {
         next();
-      } catch (err) {
-        next(err);
+        return;
       }
+
+      const { id } = req.authentication;
+      const user = await userService.getUser(id);
+
+      req.user = user;
+      next();
     },
   );
 
   router.get(
     '/',
-    asyncWrapper(async (req, res) => {
-      const users = await userService.getAllUsers();
-      res.json(users);
-    }),
-  );
-
-  router.get(
-    '/:userId',
     asyncWrapper(async (req, res) => {
       const { user } = req;
 
@@ -37,7 +31,7 @@ function create({ userService, appointmentService }) {
   );
 
   router.patch(
-    '/:userId',
+    '/',
     asyncWrapper(async (req, res) => {
       const { body } = req;
       const { user } = req;
@@ -48,7 +42,7 @@ function create({ userService, appointmentService }) {
   );
 
   router.delete(
-    '/:userId',
+    '/',
     asyncWrapper(async (req, res) => {
       const { user } = req;
       const deletedUser = await userService.deleteUser(user);
@@ -58,7 +52,7 @@ function create({ userService, appointmentService }) {
   );
 
   router.get(
-    '/:userId/appointments',
+    '/appointments',
     asyncWrapper(async (req, res) => {
       const { appointments } = req.user;
       const user = await appointmentService.getAppointments(appointments);

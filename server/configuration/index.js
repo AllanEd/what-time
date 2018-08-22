@@ -4,11 +4,13 @@ const config = {
   authentication: {
     privateKey: process.env.PRIVATE_KEY,
     publicKey: process.env.PUBLIC_KEY,
-    issuer: process.env.ISSUER,
-    subject: process.env.SUBJECT,
-    audience: process.env.AUDIENCE,
-    expiresIn: '30d',
-    algorithm: 'RS256',
+    options: {
+      issuer: process.env.ISSUER,
+      subject: process.env.SUBJECT,
+      audience: process.env.AUDIENCE,
+      expiresIn: '30d',
+      algorithm: 'RS256',
+    },
   },
 };
 
