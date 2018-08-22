@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 module.exports = (services) => {
   const authentication = authenticationRoute.create(services);
 
-  const user = userRoute.create(services, authentication);
+  const user = userRoute.create(services);
   const appointment = appointmentRoute.create(services);
 
   app.use('*', authentication);

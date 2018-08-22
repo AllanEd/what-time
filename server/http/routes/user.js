@@ -4,7 +4,7 @@ const authentication = require('../utils/authentication');
 
 const router = express.Router();
 
-function create({ userService, appointmentService }) {
+function create({ userService, appointmentService, weekService }) {
   router.all(
     '*',
     async (req, res, next) => {
@@ -52,12 +52,42 @@ function create({ userService, appointmentService }) {
   );
 
   router.get(
+    /^\/appointments\/.*/,
+    async (req, res, next) => {
+      const { appointments } = req.user;
+      const userAppointments = await appointmentService.getAppointments(appointments);
+
+      req.appointments = userAppointments;
+      next();
+    },
+  );
+
+  router.get(
     '/appointments',
     asyncWrapper(async (req, res) => {
-      const { appointments } = req.user;
-      const user = await appointmentService.getAppointments(appointments);
+      const { appointments } = req;
 
-      res.json(user);
+      res.json(appointments);
+    }),
+  );
+
+  router.param(
+    'appointmentId',
+    async (req, res, next, appointmentId) => {
+      const { appointments } = req;
+
+      req.appointment = appointments.find(appointment => appointment.id === appointmentId);
+      next();
+    },
+  );
+
+  router.get(
+    '/appointments/:appointmentId/weeks',
+    asyncWrapper(async (req, res) => {
+      const { appointment } = req;
+      const weeks = await weekService.getWeeks(appointment);
+
+      res.json(weeks);
     }),
   );
 
