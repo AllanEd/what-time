@@ -4,7 +4,9 @@ const authentication = require('../utils/authentication');
 
 const router = express.Router();
 
-function create({ userService, appointmentService, weekService }) {
+function create({
+  userService, appointmentService, weekService, dayService,
+}) {
   router.all(
     '*',
     async (req, res, next) => {
@@ -88,6 +90,26 @@ function create({ userService, appointmentService, weekService }) {
       const weeks = await weekService.getWeeks(appointment);
 
       res.json(weeks);
+    }),
+  );
+
+  router.param(
+    'weekId',
+    async (req, res, next, weekId) => {
+      const week = await weekService.getWeek(weekId);
+      req.week = week;
+
+      next();
+    },
+  );
+
+  router.get(
+    '/appointments/:appointmentId/weeks/:weekId/days',
+    asyncWrapper(async (req, res) => {
+      const { week } = req;
+      const days = await dayService.getDays(week);
+
+      res.json(days);
     }),
   );
 
