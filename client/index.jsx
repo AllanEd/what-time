@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const App = () => (
-  <div>
-Hello World!!
-  </div>
-);
+import LoginPage from '../common/containers/LoginPage';
 
 ReactDOM.render(
-  <App />,
+  <LoginPage />,
   document.getElementById('index'),
 );
