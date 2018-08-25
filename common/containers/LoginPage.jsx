@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import isEmail from 'validator/lib/isEmail';
 
-import loginActions from '../actions/loginActions';
+import { login } from '../actions/loginActions';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -14,7 +13,7 @@ class LoginPage extends React.Component {
 
     this.onNameChange = this.onNameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.login = this.login.bind(this);
+    this.userLogin = this.userLogin.bind(this);
     this.isValidEmail = this.isValidEmail.bind(this);
     this.state = {
       name: '',
@@ -36,13 +35,12 @@ class LoginPage extends React.Component {
     });
   }
 
-  login(event) {
+  userLogin(event) {
     event.preventDefault();
 
-    const { login } = this.props;
+    const { loginAction } = this.props;
     const { name, password } = this.state;
-
-    login(name, password);
+    loginAction(name, password);
   }
 
   isValidEmail() {
@@ -54,7 +52,7 @@ class LoginPage extends React.Component {
     const { name, password } = this.state;
 
     return (
-      <form onSubmit={this.login}>
+      <form onSubmit={this.userLogin}>
         <input
           type="text"
           placeholder="Name"
@@ -74,7 +72,7 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  login: PropTypes.func.isRequired,
+  loginAction: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -83,8 +81,10 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(loginActions, dispatch);
-}
+const mapDispatchToProps = dispatch => ({
+  loginAction: (name, password) => {
+    dispatch(login(name, password));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

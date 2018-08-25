@@ -1,11 +1,17 @@
 import LOGIN from '../actions/actionTypes';
+import { getInitalState } from '../actions/loginActions';
 
-export default function login(state = null, action) {
+const initialState = getInitalState();
+
+export default function login(state = initialState, action) {
   const { token, loggedInUser } = action;
 
   switch (action.type) {
     case LOGIN:
-      return { token, loggedInUser };
+      return {
+        token,
+        loggedInUser,
+      };
     default:
       return state;
   }
