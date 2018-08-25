@@ -1,19 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import isEmail from 'validator/lib/isEmail';
-import rest from '../helper/rest';
 
+import loginActions from '../actions/loginActions';
 
 class LoginPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.onNameChange = this.onNameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.login = this.login.bind(this);
     this.isValidEmail = this.isValidEmail.bind(this);
     this.state = {
-      name: null,
-      password: null,
+      name: '',
+      password: '',
     };
   }
 
@@ -31,10 +36,13 @@ class LoginPage extends React.Component {
     });
   }
 
-  async login(event) {
+  login(event) {
     event.preventDefault();
-    const response = await rest.post('http://localhost:9000/users/login', this.state);
-    console.log(response);
+
+    const { login } = this.props;
+    const { name, password } = this.state;
+
+    login(name, password);
   }
 
   isValidEmail() {
@@ -65,4 +73,18 @@ class LoginPage extends React.Component {
   }
 }
 
-export default LoginPage;
+LoginPage.propTypes = {
+  login: PropTypes.func.isRequired,
+};
+
+function mapStateToProps(state) {
+  return {
+    login: state.login,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(loginActions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

@@ -1,9 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import LoginPage from '../common/containers/LoginPage';
+import { Router } from 'react-router';
+import { Provider } from 'react-redux';
+
+import store from '../common/store/configureStore';
+
+import history from '../common/history';
+import routes from '../common/routes';
 
 ReactDOM.render(
-  <LoginPage />,
-  document.getElementById('index'),
+  <Provider store={store}>
+    <Router history={history}>
+      {routes}
+    </Router>
+  </Provider>,
+  document.getElementById('app'),
 );
