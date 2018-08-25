@@ -45,6 +45,5 @@ function login(name, password) {
 
 export {
   login,
-  getLocalStorage,
   getInitalState,
 };
