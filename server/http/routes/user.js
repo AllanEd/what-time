@@ -118,14 +118,14 @@ function create({
     asyncWrapper(async (req, res) => {
       const { name } = req.body;
       const { password } = req.body;
-      const loginUser = await userService.verifyUser(name, password);
+      const loggedInUser = await userService.verifyUser(name, password);
 
-      userService.updateLastLogin(loginUser);
+      userService.updateLastLogin(loggedInUser);
 
-      const token = authentication.sign({ id: loginUser.id });
+      const token = authentication.sign({ id: loggedInUser.id });
 
       res.json({
-        data: loginUser,
+        loggedInUser,
         token,
       });
     }),

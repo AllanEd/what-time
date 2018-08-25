@@ -8,11 +8,11 @@ function login(name, password) {
   };
 
   return async (dispatch) => {
-    const { token, data } = await rest.post('http://localhost:9000/users/login', postData);
+    const { token, loggedInUser } = await rest.post('http://localhost:9000/users/login', postData);
     dispatch({
       type: LOGIN,
       token,
-      userData: data,
+      loggedInUser,
     });
   };
 }
