@@ -7,7 +7,7 @@ const { options } = authentication;
 
 function verify(req, res, next) {
   const { originalUrl } = req;
-  const pathWithoutAuthNeeded = ['/users/login', '/users/login/', '/users/register', '/users/register/'];
+  const pathWithoutAuthNeeded = ['api/users/login', '/api/users/login/', '/api/users/register', '/api/users/register/'];
 
   if (pathWithoutAuthNeeded.includes(originalUrl)) {
     next();

@@ -20,8 +20,8 @@ module.exports = (services) => {
   api.use(acessControl);
   api.use(validateRequestBody);
 
-  api.use('/users', authentication.verify, user);
-  api.use('/appointments', appointment);
+  api.use('/api/users', authentication.verify, user);
+  api.use('/api/appointments', appointment);
 
   api.use(errorRoute);
   return api;

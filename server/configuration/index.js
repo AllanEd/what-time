@@ -1,12 +1,7 @@
 const config = {
-  webserverHost: process.env.WEBSERVER_HOST,
+  host: process.env.HOST,
   connectionString: process.env.DATABASE_CONNECTION_STRING,
-  api: {
-    port: process.env.API_PORT || 9000,
-  },
-  web: {
-    port: process.env.WEB_PORT || 3000,
-  },
+  port: process.env.PORT || 9000,
   authentication: {
     privateKey: process.env.PRIVATE_KEY,
     publicKey: process.env.PUBLIC_KEY,
