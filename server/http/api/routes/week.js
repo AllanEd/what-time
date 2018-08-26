@@ -1,5 +1,5 @@
 const express = require('express');
-const asyncWrapper = require('../utils/asyncWrapper');
+const asyncWrapper = require('../../utils/asyncWrapper');
 
 const router = express.Router();
 
@@ -17,7 +17,7 @@ function create({ weekService }) {
   //     const {user} = req;
   //     const {week} = req;
   //     const week = await weekService.getUserWeek(user);
-      
+
   //     res.json(appointments);
   //   }),
   // );

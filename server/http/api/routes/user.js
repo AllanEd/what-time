@@ -1,6 +1,6 @@
 const express = require('express');
-const asyncWrapper = require('../utils/asyncWrapper');
-const authentication = require('../utils/authentication');
+const asyncWrapper = require('../../utils/asyncWrapper');
+const authentication = require('../../utils/authentication');
 
 const router = express.Router();
 

@@ -1,6 +1,11 @@
 const config = {
   connectionString: process.env.DATABASE_CONNECTION_STRING,
-  port: process.env.PORT || 5000,
+  api: {
+    port: process.env.API_PORT || 9000,
+  },
+  web: {
+    port: process.env.WEB_PORT || 3000,
+  },
   authentication: {
     privateKey: process.env.PRIVATE_KEY,
     publicKey: process.env.PUBLIC_KEY,

@@ -6,7 +6,7 @@ const router = express.Router();
 
 function create() {
   router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../client/index.html'));
+    res.sendFile(path.join(__dirname, '../../../../client/index.html'));
   });
   return router;
 }

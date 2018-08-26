@@ -7,10 +7,9 @@ const { options } = authentication;
 
 function verify(req, res, next) {
   const { originalUrl } = req;
-  const loginPath = '/users/login';
-  const registerPath = '/users/register';
+  const pathWithoutAuthNeeded = ['/users/login', '/users/login/', '/users/register', '/users/register/'];
 
-  if (originalUrl === loginPath || originalUrl === registerPath) {
+  if (pathWithoutAuthNeeded.includes(originalUrl)) {
     next();
     return;
   }
