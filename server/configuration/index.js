@@ -1,4 +1,5 @@
 const config = {
+  webserverHost: process.env.WEBSERVER_HOST,
   connectionString: process.env.DATABASE_CONNECTION_STRING,
   api: {
     port: process.env.API_PORT || 9000,
