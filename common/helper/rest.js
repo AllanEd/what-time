@@ -1,16 +1,34 @@
-const getHttpOptions = (methodName, data) => ({
-  method: methodName,
-  body: JSON.stringify(data),
-  headers: new Headers({
-    'Content-Type': 'application/json',
-  }),
-});
+import * as localStore from '../store/localStore';
+
 
 let json;
 
+const createRequest = (method, url, data) => {
+  const loginData = localStore.get('login');
+  const token = loginData ? loginData.token : null;
+
+  const headers = new Headers({
+    'Content-Type': 'application/json',
+    Authorization: token,
+  });
+
+  const config = {
+    method,
+    headers,
+  };
+
+  if (data) {
+    config.body = JSON.stringify(data);
+  }
+
+  return new Request(url, config);
+};
+
 const get = async (url) => {
+  const request = createRequest('GET', url);
+
   try {
-    const response = await fetch(url);
+    const response = await fetch(request);
     json = await response.json();
   } catch (err) {
     console.error(err.message);
@@ -20,8 +38,10 @@ const get = async (url) => {
 };
 
 const post = async (url, data) => {
+  const request = createRequest('POST', url, data);
+
   try {
-    const response = await fetch(url, getHttpOptions('POST', data));
+    const response = await fetch(request);
     json = await response.json();
   } catch (err) {
     console.error(err.message);

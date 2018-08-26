@@ -1,13 +1,9 @@
-import rest from '../helper/rest';
+import http from '../helper/rest';
 import LOGIN from './actionTypes';
-
-function getLocalStorage() {
-  const localStorageData = JSON.parse(localStorage.getItem('login'));
-  return localStorageData;
-}
+import * as localStore from '../store/localStore';
 
 function getInitalState() {
-  const localStorageData = getLocalStorage();
+  const localStorageData = localStore.get('login');
 
   if (localStorageData) {
     if (localStorageData.token && localStorageData.loggedInUser) {
@@ -18,10 +14,6 @@ function getInitalState() {
   return null;
 }
 
-function setLocalStorage(data) {
-  localStorage.setItem('login', JSON.stringify(data));
-}
-
 function login(name, password) {
   const postData = {
     name,
@@ -29,11 +21,14 @@ function login(name, password) {
   };
 
   return async (dispatch) => {
-    const { token, loggedInUser } = await rest.post('http://localhost:9000/users/login', postData);
-    setLocalStorage({
-      token,
-      loggedInUser,
-    });
+    const { token, loggedInUser } = await http.post('http://localhost:9000/api/users/login', postData);
+    localStore.set(
+      'login',
+      {
+        token,
+        loggedInUser,
+      },
+    );
 
     dispatch({
       type: LOGIN,

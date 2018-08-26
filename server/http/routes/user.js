@@ -54,7 +54,7 @@ function create({
   );
 
   router.get(
-    /^\/appointments\/.*/,
+    '/appointments*',
     async (req, res, next) => {
       const { appointments } = req.user;
       const userAppointments = await appointmentService.getAppointments(appointments);
