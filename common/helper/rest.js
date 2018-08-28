@@ -1,10 +1,10 @@
 import * as localStore from '../store/localStore';
-
+import LOGIN from '../actions/actionTypes';
 
 let json;
 
 const createRequest = (method, url, data) => {
-  const loginData = localStore.get('login');
+  const loginData = localStore.get(LOGIN);
   const token = loginData ? loginData.token : null;
 
   const headers = new Headers({
