@@ -1,10 +1,13 @@
 import http from '../helper/rest';
+import { GET_APPOINTMENTS } from './actionTypes';
 
-function getAppointments() {
-  return async (dispatch) => {
-    // TODO: Apply dispatcher
-    const appointments = await http.get('http://localhost:9000/api/users/appointments');
-  };
-}
+const getAppointments = () => async (dispatch) => {
+  const appointments = await http.get('http://localhost:9000/api/users/appointments');
+
+  dispatch({
+    type: GET_APPOINTMENTS,
+    appointments,
+  });
+};
 
 export default getAppointments;

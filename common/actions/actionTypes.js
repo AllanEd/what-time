@@ -1,2 +1,7 @@
 const LOGIN = 'LOGIN';
-export default LOGIN;
+const GET_APPOINTMENTS = 'GET_APPOINTMENTS';
+
+export {
+  LOGIN,
+  GET_APPOINTMENTS,
+};

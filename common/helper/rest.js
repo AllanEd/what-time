@@ -1,5 +1,5 @@
 import * as localStore from '../store/localStore';
-import LOGIN from '../actions/actionTypes';
+import { LOGIN } from '../actions/actionTypes';
 
 let json;
 

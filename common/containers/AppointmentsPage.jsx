@@ -1,17 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import getAppointments from '../actions/appointmentsActions';
+import Actions from '../actions/appointmentsActions';
 
 // TODO: Actually the hole implementation...
 class AppointmentsPage extends React.Component {
   constructor(props) {
     super(props);
-  }
 
-  componentDidMount() {
-    this.props.getApp();
+    const { getAppointments } = this.props;
+    getAppointments();
   }
 
   render() {
@@ -23,15 +23,19 @@ class AppointmentsPage extends React.Component {
   }
 }
 
+AppointmentsPage.propTypes = {
+  getAppointments: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
-    loggedInUser: state.login.loggedInUser,
+    appointments: state.getAppointments,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  getApp: (name, password) => {
-    dispatch(getAppointments(name, password));
+  getAppointments: (name, password) => {
+    dispatch(Actions(name, password));
   },
 });
 

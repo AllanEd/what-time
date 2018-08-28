@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import isEmail from 'validator/lib/isEmail';
 
-import { login } from '../actions/loginActions';
+import * as Actions from '../actions/loginActions';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -38,9 +38,9 @@ class LoginPage extends React.Component {
   userLogin(event) {
     event.preventDefault();
 
-    const { loginAction } = this.props;
+    const { login } = this.props;
     const { name, password } = this.state;
-    loginAction(name, password);
+    login(name, password);
   }
 
   isValidEmail() {
@@ -72,7 +72,7 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  loginAction: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -82,8 +82,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginAction: (name, password) => {
-    dispatch(login(name, password));
+  login: (name, password) => {
+    dispatch(Actions.login(name, password));
   },
 });
 

@@ -1,5 +1,5 @@
 import http from '../helper/rest';
-import LOGIN from './actionTypes';
+import { LOGIN } from './actionTypes';
 import * as localStore from '../store/localStore';
 
 function getInitalState() {
@@ -14,29 +14,28 @@ function getInitalState() {
   return null;
 }
 
-function login(name, password) {
+const login = (name, password) => async (dispatch) => {
   const postData = {
     name,
     password,
   };
 
-  return async (dispatch) => {
-    const { token, loggedInUser } = await http.post('http://localhost:9000/api/users/login', postData);
-    localStore.set(
-      LOGIN,
-      {
-        token,
-        loggedInUser,
-      },
-    );
+  const { token, loggedInUser } = await http.post('http://localhost:9000/api/users/login', postData);
 
-    dispatch({
-      type: LOGIN,
+  localStore.set(
+    LOGIN,
+    {
       token,
       loggedInUser,
-    });
-  };
-}
+    },
+  );
+
+  dispatch({
+    type: LOGIN,
+    token,
+    loggedInUser,
+  });
+};
 
 export {
   login,
