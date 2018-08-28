@@ -3,7 +3,7 @@ import LOGIN from './actionTypes';
 import * as localStore from '../store/localStore';
 
 function getInitalState() {
-  const localStorageData = localStore.get('login');
+  const localStorageData = localStore.get(LOGIN);
 
   if (localStorageData) {
     if (localStorageData.token && localStorageData.loggedInUser) {
@@ -23,7 +23,7 @@ function login(name, password) {
   return async (dispatch) => {
     const { token, loggedInUser } = await http.post('http://localhost:9000/api/users/login', postData);
     localStore.set(
-      'login',
+      LOGIN,
       {
         token,
         loggedInUser,
