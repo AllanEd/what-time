@@ -1,12 +1,10 @@
 const express = require('express');
 
-const path = require('path');
-
 const router = express.Router();
 
 function create() {
-  router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../client/index.html'));
+  router.options('*', (req, res) => {
+    res.sendStatus(200);
   });
   return router;
 }

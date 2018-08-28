@@ -1,5 +1,5 @@
 const express = require('express');
-const asyncWrapper = require('../utils/asyncWrapper');
+const asyncWrapper = require('../../utils/asyncWrapper');
 
 const router = express.Router();
 

@@ -1,14 +1,16 @@
-const { host } = require('../../configuration');
+const { webserverHost } = require('../../configuration');
 
 /**
  *
  * @param {function} fn
  */
 const accessControl = (req, res, next) => {
-  res.header('Access-Control-Allow-Origin', host);
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-
+  res.set({
+    'Access-Control-Allow-Origin': webserverHost,
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE',
+    'Access-Control-Allow-Headers': 'authorization, content-type',
+    'Access-Control-Max-Age': 600,
+  });
   next();
 };
 

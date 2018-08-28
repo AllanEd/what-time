@@ -4,8 +4,10 @@
   "description": "a small meeting app",
   "main": "index.js",
   "scripts": {
-    "debug": "nodemon --watch server --exec node --require dotenv/config --require babel-register --inspect server/server.js",
-    "start": "node ./server/server.js",
+    "debug-apiServer": "nodemon --watch server --exec node --require dotenv/config --require babel-register --inspect server/apiServer.js",
+    "debug-webServer": "nodemon --watch server --exec node --require dotenv/config --require babel-register --inspect server/webServer.js",
+    "start-apiServer": "node ./server/apiServer.js",
+    "start-webServer": "node ./server/webServer.js",
     "build": "babel server/ -d server/",
     "lint": "eslint client/**",
     "test": "mocha test --recursive --compilers js:babel-register",

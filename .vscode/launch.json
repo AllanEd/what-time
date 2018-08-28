@@ -27,8 +27,19 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Server: Develop Mode",
-      "program": "${workspaceFolder}/server/server.js",
+      "name": "Launch Web Server: Develop Mode",
+      "program": "${workspaceFolder}/server/webServer.js",
+      "runtimeExecutable": "babel-node",
+      "envFile": "${workspaceFolder}/.env",
+      "env": {
+        "NODE_ENV": "develop"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Api Server: Develop Mode",
+      "program": "${workspaceFolder}/server/apiServer.js",
       "runtimeExecutable": "babel-node",
       "envFile": "${workspaceFolder}/.env",
       "env": {
