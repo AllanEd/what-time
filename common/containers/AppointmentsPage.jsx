@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import Actions from '../actions/appointmentsActions';
 
+import Appointment from '../components/appointment/Appointment';
+
 // TODO: Actually the hole implementation...
 class AppointmentsPage extends React.Component {
   constructor(props) {
@@ -15,21 +17,35 @@ class AppointmentsPage extends React.Component {
   }
 
   render() {
+    const { appointments } = this.props;
+    debugger;
+    if (appointments === null) {
+      return (
+        <div>
+          Loading...
+        </div>
+      );
+    }
     return (
-      <h1>
-        Appointments
-      </h1>
+      <div>
+        {appointments.map(appointment => <Appointment key={appointment.id} {...appointment} />)}
+      </div>
     );
   }
 }
 
 AppointmentsPage.propTypes = {
   getAppointments: PropTypes.func.isRequired,
+  appointments: PropTypes.arrayOf(PropTypes.shape()),
+};
+
+AppointmentsPage.defaultProps = {
+  appointments: null,
 };
 
 function mapStateToProps(state) {
   return {
-    appointments: state.getAppointments,
+    appointments: state.getAppointments ? state.getAppointments.appointments : null,
   };
 }
 

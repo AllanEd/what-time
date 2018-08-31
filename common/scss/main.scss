@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import 'variables';
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  color: $what-time-black;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
