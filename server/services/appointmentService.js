@@ -1,4 +1,4 @@
-function create(appointmentRepository) {
+const create = (appointmentRepository) => {
   async function getAppointment(id) {
     const appointments = await appointmentRepository.getById(id);
     return appointments;
@@ -6,9 +6,9 @@ function create(appointmentRepository) {
 
   async function getAppointments(ids) {
     const appointments = await appointmentRepository.getByIds(ids);
-    return appointments; 
+    return appointments;
   }
-  
+
   async function createAppointment(appointment) {
     await appointmentRepository.add(appointment);
   }
@@ -21,8 +21,8 @@ function create(appointmentRepository) {
     getAppointment,
     getAppointments,
     createAppointment,
-    createAppointments
+    createAppointments,
   };
-}
+};
 
-module.exports.create = create;
+export default { create };

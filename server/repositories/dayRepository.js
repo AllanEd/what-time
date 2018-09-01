@@ -1,26 +1,23 @@
-const populate = require('./populate/day');
+import populate from './populate/day';
 
-function create({ Day }) {
-  async function getById(id) {
+const create = ({ Day }) => {
+  const getById = async (id) => {
     const day = await Day.findById(id).populate(populate);
     return day.toWeekModel();
-  }
+  };
 
-  async function getByIds(ids) {
-    const days = await Day.find({'_id': { $in: ids}});
-    
+  const getByIds = async (ids) => {
+    const days = await Day.find({ _id: { $in: ids } });
     return days.map(day => day.toDayModel());
-  }
+  };
 
-  async function addMany(days) {
-    await Day.insertMany(days);
-  }
+  const addMany = async days => Day.insertMany(days);
 
   return {
     getById,
     getByIds,
-    addMany
+    addMany,
   };
-}
+};
 
-module.exports.create = create;
+export default { create };

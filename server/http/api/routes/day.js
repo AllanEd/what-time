@@ -1,5 +1,5 @@
-const express = require('express');
-const asyncWrapper = require('../../utils/asyncWrapper');
+import express from 'express';
+import asyncWrapper from '../../utils/asyncWrapper';
 
 const router = express.Router();
 
@@ -15,4 +15,4 @@ function create({ dayService }) {
   return router;
 }
 
-module.exports.create = create;
+export default create;

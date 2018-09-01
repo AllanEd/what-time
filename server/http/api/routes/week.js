@@ -1,5 +1,5 @@
-const express = require('express');
-const asyncWrapper = require('../../utils/asyncWrapper');
+import express from 'express';
+import asyncWrapper from '../../utils/asyncWrapper';
 
 const router = express.Router();
 
@@ -11,18 +11,8 @@ function create({ weekService }) {
       res.json(weeks);
     }),
   );
-  // router.get(
-  //   '/',
-  //   asyncWrapper(async (req, res) => {
-  //     const {user} = req;
-  //     const {week} = req;
-  //     const week = await weekService.getUserWeek(user);
-
-  //     res.json(appointments);
-  //   }),
-  // );
 
   return router;
 }
 
-module.exports.create = create;
+export default { create };

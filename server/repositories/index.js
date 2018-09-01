@@ -1,13 +1,14 @@
-const userRepositoryFactory = require('./userRepository');
-const appointmentRepositoryFactory = require('./appointmentRepository');
-const weekRepositoryFactory = require('./weekRepository');
-const dayRepositoryFactory = require('./dayRepository');
+import userRepositoryFactory from './userRepository';
+import appointmentRepositoryFactory from './appointmentRepository';
+import weekRepositoryFactory from './weekRepository';
+import dayRepositoryFactory from './dayRepository';
 
-module.exports = db => {
+const create = (db) => {
   const userRepository = userRepositoryFactory.create(db);
   const appointmentRepository = appointmentRepositoryFactory.create(db);
   const weekRepository = weekRepositoryFactory.create(db);
   const dayRepository = dayRepositoryFactory.create(db);
+
   return {
     userRepository,
     appointmentRepository,
@@ -15,3 +16,5 @@ module.exports = db => {
     dayRepository,
   };
 };
+
+export default { create };

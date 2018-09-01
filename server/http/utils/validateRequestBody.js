@@ -1,5 +1,5 @@
-const isEmail = require('validator/lib/isEmail');
-const isLength = require('validator/lib/isLength');
+import isEmail from 'validator/lib/isEmail';
+import isLength from 'validator/lib/isLength';
 
 const checkValueLength = (body) => {
   Object.keys(body).forEach((key) => {
@@ -15,7 +15,7 @@ const validateEmail = (email) => {
   }
 };
 
-function validateInput(req, res, next) {
+const validateInput = (req, res, next) => {
   const { body } = req;
 
   if (body === undefined) {
@@ -29,6 +29,6 @@ function validateInput(req, res, next) {
   }
 
   next();
-}
+};
 
-module.exports = validateInput;
+export default validateInput;

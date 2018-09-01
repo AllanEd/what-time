@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
-const DayModel = require('../../models/Day');
+import mongoose from 'mongoose';
+import DayModel from '../../models/Day';
 
 const { Schema } = mongoose;
 
 const daySchema = new Schema({
   date: Date,
-  subscribers: [{type: Schema.Types.ObjectId, ref: 'User'}],
+  subscribers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   timeSlots: {
     type: Map,
-    of: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    of: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   },
 });
 
@@ -18,4 +18,4 @@ Day.prototype.toDayModel = function toDayModel() {
   return new DayModel(this);
 };
 
-module.exports = Day;
+export default Day;

@@ -1,4 +1,4 @@
-function create({ User }) {
+const create = ({ User }) => {
   async function add(user) {
     const createdUser = await User.create(user);
     return createdUser.toUserModel();
@@ -14,22 +14,22 @@ function create({ User }) {
   }
 
   async function getByName(name) {
-    const user = await User.where({name}).findOne().exec();
+    const user = await User.where({ name }).findOne().exec();
     return user.toUserModel();
   }
 
   async function getByEmail(email) {
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
 
     if (user) {
       return user.toUserModel();
-    } 
+    }
 
-    throw new Error("User with given Email does not exists");
+    throw new Error('User with given Email does not exists');
   }
 
   async function updateUserById(id, updateData) {
-    const user = await User.findByIdAndUpdate(id, updateData, {new: true});
+    const user = await User.findByIdAndUpdate(id, updateData, { new: true });
     return user.toUserModel();
   }
 
@@ -38,7 +38,7 @@ function create({ User }) {
     return user.toUserModel();
   }
 
-  
+
   return {
     add,
     addMany,
@@ -46,8 +46,8 @@ function create({ User }) {
     getByName,
     getByEmail,
     updateUserById,
-    deleteUserById
+    deleteUserById,
   };
-}
+};
 
-module.exports.create = create;
+export default { create };

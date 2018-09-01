@@ -1,15 +1,15 @@
-const users = require('./collections/users');
-const appointments = require('./collections/appointment');
-const weeks = require('./collections/weeks');
-const days = require('./collections/days');
+import users from './collections/users';
+import appointments from './collections/appointment';
+import weeks from './collections/weeks';
+import days from './collections/days';
 
-module.exports = services => {
-  const {createUsers} = services.userService;
-  const {createAppointments} = services.appointmentService;
-  const {createWeeks} = services.weekService;
-  const {createDays} = services.dayService;
+const create = (services) => {
+  const { createUsers } = services.userService;
+  const { createAppointments } = services.appointmentService;
+  const { createWeeks } = services.weekService;
+  const { createDays } = services.dayService;
 
-  function create() {
+  function insert() {
     createUsers(users);
     createAppointments(appointments);
     createWeeks(weeks);
@@ -17,6 +17,9 @@ module.exports = services => {
   }
 
   return {
-    create
-  }; 
+    insert,
+  };
 };
+
+
+export default { create };

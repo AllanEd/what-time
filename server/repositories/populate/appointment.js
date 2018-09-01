@@ -1,12 +1,12 @@
-module.exports = [
-  { 
+export default [
+  {
     path: 'owner',
-    select: 'name'
+    select: 'name',
   }, {
     path: 'subscribers',
-    select: 'name'
-  }, { 
+    select: 'name',
+  }, {
     path: 'weeks',
     select: ['startDate', 'subscribers'],
-  }
-]
+  },
+];

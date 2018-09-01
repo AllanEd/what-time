@@ -1,7 +1,6 @@
 // @flow
 
-const User = require('../models/User');
-const dayFactory = require('../factories/dayFactory');
+import dayFactory from '../factories/dayFactory';
 
 class Day {
   id: string;
@@ -24,4 +23,4 @@ class Day {
 
 Day.factory = dayFactory;
 
-module.exports = Day;
+export default Day;

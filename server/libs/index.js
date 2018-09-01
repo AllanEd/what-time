@@ -1,7 +1,7 @@
-module.exports = function (blocking) {
-  [process.stdout, process.stderr].forEach(function (stream) {
+export default (blocking) => {
+  [process.stdout, process.stderr].forEach((stream) => {
     if (stream._handle && stream.isTTY && typeof stream._handle.setBlocking === 'function') {
-      stream._handle.setBlocking(blocking)
+      stream._handle.setBlocking(blocking);
     }
-  })
-}
+  });
+};

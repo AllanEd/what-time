@@ -1,7 +1,7 @@
 // @flow
 
-const Day = require('../models/Day');
-const weekFactory = require('../factories/weekFactory');
+import Day from './Day';
+import weekFactory from '../factories/weekFactory';
 
 class Week {
   id: string;
@@ -24,4 +24,4 @@ class Week {
 
 Week.factory = weekFactory;
 
-module.exports = Week;
+export default Week;

@@ -1,21 +1,19 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+import express from 'express';
+import bodyParser from 'body-parser';
 
-const rootRoute = require('./routes/root');
+import rootRoute from './routes/root';
 
-const webpackMiddleware = require('../utils/webpackMiddleware');
+import webpackMiddleware from '../utils/webpackMiddleware';
 
 const web = express();
 web.use(bodyParser.urlencoded({ extended: true }));
 web.use(bodyParser.json());
 
-module.exports = () => {
-  const root = rootRoute.create();
+const root = rootRoute.create();
 
-  web.use(webpackMiddleware.dev);
-  web.use(webpackMiddleware.hot);
+web.use(webpackMiddleware.dev);
+web.use(webpackMiddleware.hot);
 
-  web.get('*', root);
+web.get('*', root);
 
-  return web;
-};
+export default web;

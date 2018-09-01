@@ -1,37 +1,34 @@
-const populate = require('./populate/appointment');
+import populate from './populate/appointment';
 
 function create({ Appointment }) {
-  async function getById(id) {
+  const getById = async (id) => {
     const appointment = await Appointment.findById(id).populate(populate);
     return appointment.toAppointmentModel();
-  }
+  };
 
-  async function getByIds(ids) {
-    const appointments = await Appointment.find({'_id': { $in: ids}}).populate(populate);
-    
+  const getByIds = async (ids) => {
+    const appointments = await Appointment.find({ _id: { $in: ids } }).populate(populate);
+
     return appointments.map(appointment => appointment.toAppointmentModel());
-  }
+  };
 
-  async function getByUserId(userId) {
-    const appointments = await Appointment.find({ $or:[ {'owner': userId}, {'subscribers': userId} ]}).populate(populate);
+  const getByUserId = async (userId) => {
+    const findParameters = { $or: [{ owner: userId }, { subscribers: userId }] };
+    const appointments = await Appointment.find(findParameters).populate(populate);
     return appointments.map(appointment => appointment.toAppointmentModel());
-  }
-  
-  async function add(appointment) {
-    await Appointment.save(appointment);
-  }
+  };
 
-  async function addMany(appointments) {
-    await Appointment.insertMany(appointments);
-  }
+  const add = async appointment => Appointment.save(appointment);
+
+  const addMany = async appointments => Appointment.insertMany(appointments);
 
   return {
     getById,
     getByIds,
     getByUserId,
     add,
-    addMany
+    addMany,
   };
 }
 
-module.exports.create = create;
+export default { create };

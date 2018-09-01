@@ -1,6 +1,6 @@
-const express = require('express');
-const asyncWrapper = require('../../utils/asyncWrapper');
-const authentication = require('../../utils/authentication');
+import express from 'express';
+import asyncWrapper from '../../utils/asyncWrapper';
+import authentication from '../../utils/authentication';
 
 const router = express.Router();
 
@@ -151,4 +151,4 @@ function create({
   return router;
 }
 
-module.exports.create = create;
+export default { create };

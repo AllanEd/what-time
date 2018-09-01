@@ -1,7 +1,7 @@
 // @flow
 
-const User = require('./User');
-const Week = require('./Week');
+import User from './User';
+import Week from './Week';
 
 class Appointment {
   id: string;
@@ -9,7 +9,7 @@ class Appointment {
   title: string;
 
   isDone: boolean;
-  
+
   startDate: Date;
 
   owner: Object;
@@ -29,4 +29,4 @@ class Appointment {
   }
 }
 
-module.exports = Appointment;
+export default Appointment;

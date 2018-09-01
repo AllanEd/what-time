@@ -1,8 +1,8 @@
-module.exports = [
+export default [
   {
     path: 'subscribers',
-    select: 'name'
+    select: 'name',
   }, {
     path: 'timeSlots',
-  }
-]
+  },
+];

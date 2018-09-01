@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 const router = express.Router();
 
@@ -9,4 +9,4 @@ function create() {
   return router;
 }
 
-module.exports.create = create;
+export default { create };

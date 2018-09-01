@@ -1,6 +1,5 @@
-const express = require('express');
-
-const path = require('path');
+import express from 'express';
+import path from 'path';
 
 const router = express.Router();
 
@@ -11,4 +10,4 @@ function create() {
   return router;
 }
 
-module.exports.create = create;
+export default { create };

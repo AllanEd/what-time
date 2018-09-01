@@ -1,11 +1,16 @@
-const logger = require('./libs/logger');
-const config = require('./configuration');
-const db = require('./database');
-const repositories = require('./repositories')(db);
-const services = require('./services')(repositories);
-const api = require('./http/api/api')(services);
-const signals = require('./signals');
-const sampleData = require('./sampleData')(services);
+import logger from './libs/logger';
+import config from './configuration';
+import signals from './signals';
+import db from './database';
+import repositoriesFactory from './repositories';
+import servicesFactory from './services';
+import apiFactory from './http/api/api';
+import sampleDataFactory from './sampleData';
+
+const repositories = repositoriesFactory.create(db);
+const services = servicesFactory.create(repositories);
+const api = apiFactory.create(services);
+const sampleData = sampleDataFactory.create(services);
 
 const apiServer = api.listen(config.api.port, () => {
   logger.info(`Listening on *:${config.api.port}`);
@@ -13,7 +18,7 @@ const apiServer = api.listen(config.api.port, () => {
 
 if (process.env.NODE_ENV === 'develop') {
   db.dropDatabase();
-  sampleData.create();
+  sampleData.insert();
 }
 
 const shutdown = signals.init(async () => {

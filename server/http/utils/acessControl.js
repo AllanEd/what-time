@@ -1,4 +1,4 @@
-const { webserverHost } = require('../../configuration');
+import config from '../../configuration';
 
 /**
  *
@@ -6,7 +6,7 @@ const { webserverHost } = require('../../configuration');
  */
 const accessControl = (req, res, next) => {
   res.set({
-    'Access-Control-Allow-Origin': webserverHost,
+    'Access-Control-Allow-Origin': config.webserverHost,
     'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE',
     'Access-Control-Allow-Headers': 'authorization, content-type',
     'Access-Control-Max-Age': 600,
@@ -14,4 +14,4 @@ const accessControl = (req, res, next) => {
   next();
 };
 
-module.exports = accessControl;
+export default accessControl;

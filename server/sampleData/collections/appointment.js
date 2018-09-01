@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const { ObjectId } = mongoose.Types;
 
@@ -22,4 +22,4 @@ const appointments = [{
   __v: 0,
 }];
 
-module.exports = appointments;
+export default appointments;

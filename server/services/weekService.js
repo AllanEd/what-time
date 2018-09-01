@@ -1,4 +1,4 @@
-function create(weekRepository) {
+const create = (weekRepository) => {
   async function getWeek(id) {
     const week = await weekRepository.getById(id);
     return week;
@@ -17,8 +17,8 @@ function create(weekRepository) {
   return {
     getWeek,
     getWeeks,
-    createWeeks
+    createWeeks,
   };
-}
+};
 
-module.exports.create = create;
+export default { create };

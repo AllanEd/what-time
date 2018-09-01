@@ -1,7 +1,7 @@
 // @flow
 
-const bcrypt = require('bcrypt');
-const userFactory = require('../factories/userFactory');
+import bcrypt from 'bcrypt';
+import userFactory from '../factories/userFactory';
 
 class User {
   id: string;
@@ -20,25 +20,25 @@ class User {
     this.id = userData.id;
     this.name = userData.name;
     this.email = userData.email;
-    this.appointments = this.constructor.obejctIdsToString(userData.appointments)
+    this.appointments = this.constructor.obejctIdsToString(userData.appointments);
 
-    const {password} = userData;
+    const { password } = userData;
     this.getPassword = () => password;
   }
 
   isPasswordValid(passwordEntry: string): boolean {
     return bcrypt.compareSync(passwordEntry, this.getPassword());
-  };
+  }
 
   static obejctIdsToString(objectIds: Array<Object>): Array<string> {
     if (objectIds === undefined) {
       return [];
     }
-    
+
     return objectIds.map(objectId => objectId.toString());
   }
 }
 
 User.factory = userFactory;
 
-module.exports = User;
+export default User;

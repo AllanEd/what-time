@@ -1,19 +1,19 @@
-const mongoose = require('mongoose');
-const { connectionString } = require('../configuration');
+import mongoose from 'mongoose';
+import config from '../configuration';
 
-mongoose.connect(connectionString, {useNewUrlParser: true });
+import User from './entities/User';
+import Appointment from './entities/Appointment';
+import Week from './entities/Week';
+import Day from './entities/Day';
+
+mongoose.connect(config.connectionString, { useNewUrlParser: true });
 
 const mongoDb = mongoose.connection;
 
-const User = require('./entities/User');
-const Appointment = require('./entities/Appointment');
-const Week = require('./entities/Week');
-const Day = require('./entities/Day');
-
-module.exports = {
+export default {
   User,
   Appointment,
   Week,
   Day,
-  dropDatabase: () => mongoDb.dropDatabase()
+  dropDatabase: () => mongoDb.dropDatabase(),
 };

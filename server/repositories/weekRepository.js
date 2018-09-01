@@ -1,4 +1,4 @@
-const populate = require('./populate/week');
+import populate from './populate/week';
 
 function create({ Week }) {
   async function getById(id) {
@@ -7,8 +7,8 @@ function create({ Week }) {
   }
 
   async function getByIds(ids) {
-    const weeks = await Week.find({'_id': { $in: ids}}).populate(populate);
-    
+    const weeks = await Week.find({ _id: { $in: ids } }).populate(populate);
+
     return weeks.map(week => week.toWeekModel());
   }
 
@@ -19,8 +19,8 @@ function create({ Week }) {
   return {
     getById,
     getByIds,
-    addMany
+    addMany,
   };
 }
 
-module.exports.create = create;
+export default { create };

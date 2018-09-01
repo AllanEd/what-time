@@ -1,4 +1,4 @@
-function create(dayRepository) {
+const create = (dayRepository) => {
   async function getDay(id) {
     const day = await dayRepository.getById(id);
     return day;
@@ -6,7 +6,7 @@ function create(dayRepository) {
 
   async function getDays(week) {
     const weekIds = [];
-    Object.keys(week.days).forEach(key => {
+    Object.keys(week.days).forEach((key) => {
       weekIds.push(week.days[key].id);
     });
     const days = await dayRepository.getByIds(weekIds);
@@ -21,8 +21,8 @@ function create(dayRepository) {
   return {
     getDay,
     getDays,
-    createDays
+    createDays,
   };
-}
+};
 
-module.exports.create = create;
+export default { create };

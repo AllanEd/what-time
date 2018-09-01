@@ -1,17 +1,17 @@
-const bcrypt = require('bcrypt');
-const isEmpty = require('validator/lib/isEmpty');
+import bcrypt from 'bcrypt';
+import isEmpty from 'validator/lib/isEmpty';
 
 const requiredFields = (inputData) => {
-  Object.keys(inputData).forEach(key => {
+  Object.keys(inputData).forEach((key) => {
     if (inputData[key] === undefined) {
-      throw new Error("Not all Data is given");
+      throw new Error('Not all Data is given');
     } else if (isEmpty(inputData[key])) {
-      throw new Error("Not all Data is given");
+      throw new Error('Not all Data is given');
     }
   });
-}
+};
 
-function create(userRepository) {
+const create = (userRepository) => {
   async function getUser(id) {
     const user = await userRepository.getById(id);
     return user;
@@ -22,13 +22,13 @@ function create(userRepository) {
 
     try {
       user = await userRepository.getByName(name);
-    } catch(error) {
-      throw new Error("No user with the given name");
+    } catch (error) {
+      throw new Error('No user with the given name');
     }
 
     return user;
   }
-  
+
   async function createUser(user) {
     await userRepository.add(user);
   }
@@ -38,14 +38,14 @@ function create(userRepository) {
   }
 
   async function editUser(user, requestData) {
-    const {id} = user;
+    const { id } = user;
     const mergedUser = Object.assign(user, requestData);
     const updatedUser = await userRepository.updateUserById(id, mergedUser);
     return updatedUser;
   }
 
   async function deleteUser(user) {
-    const {id} = user;
+    const { id } = user;
     const updatedUser = await userRepository.deleteUserById(id);
     return updatedUser;
   }
@@ -59,14 +59,14 @@ function create(userRepository) {
     }
 
     const updateData = {
-      lastLogin: new Date()
+      lastLogin: new Date(),
     };
 
     userRepository.updateUserById(userId, updateData);
   }
 
   async function verifyUser(name, password) {
-    requiredFields({name, password});
+    requiredFields({ name, password });
 
     const user = await getUserByName(name);
     let isPasswordValid = false;
@@ -75,10 +75,10 @@ function create(userRepository) {
 
     if (isPasswordValid) {
       return user;
-    } 
-      
-    throw new Error("Wrong password");
-  };
+    }
+
+    throw new Error('Wrong password');
+  }
 
   async function doesEmailExists(email) {
     let emailExists;
@@ -86,7 +86,7 @@ function create(userRepository) {
     try {
       await userRepository.getByEmail(email);
       emailExists = true;
-    } catch(error) {
+    } catch (error) {
       emailExists = false;
     }
 
@@ -94,12 +94,12 @@ function create(userRepository) {
   }
 
   async function registerUser(name, password, email) {
-    requiredFields({name, password, email});
+    requiredFields({ name, password, email });
 
     const emailAlreadyExists = await doesEmailExists(email);
 
     if (emailAlreadyExists) {
-      throw new Error("Email already exists");
+      throw new Error('Email already exists');
     }
 
     const saltRounds = 10;
@@ -108,14 +108,14 @@ function create(userRepository) {
       password: bcrypt.hashSync(password, saltRounds),
       email,
       registered: new Date(),
-      lastLogin: new Date()
-    }
+      lastLogin: new Date(),
+    };
 
     const newUser = await userRepository.add(newUserData);
     return newUser;
   }
 
-  
+
   return {
     getUser,
     getUserByName,
@@ -125,8 +125,8 @@ function create(userRepository) {
     editUser,
     updateLastLogin,
     verifyUser,
-    registerUser
+    registerUser,
   };
-}
+};
 
-module.exports.create = create;
+export default { create };

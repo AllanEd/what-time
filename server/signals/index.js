@@ -1,4 +1,4 @@
-const process = require('process');
+import process from 'process';
 
 const init = closeFunc => async () => {
   try {
@@ -9,4 +9,4 @@ const init = closeFunc => async () => {
   }
 };
 
-module.exports = { init };
+export default { init };

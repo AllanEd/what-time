@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken');
-const { authentication } = require('../../configuration');
+import jwt from 'jsonwebtoken';
+import config from '../../configuration';
 
-const { publicKey } = authentication;
-const { privateKey } = authentication;
-const { options } = authentication;
+const { publicKey } = config.authentication;
+const { privateKey } = config.authentication;
+const { options } = config.authentication;
 
-function verify(req, res, next) {
+const verify = (req, res, next) => {
   const { originalUrl } = req;
   const pathWithoutAuthNeeded = ['/api/users/login', '/api/users/login/', '/api/users/register', '/api/users/register/'];
 
@@ -21,17 +21,15 @@ function verify(req, res, next) {
     console.error(err);
     next(new Error('You are not authorized'));
   }
-}
+};
 
-function sign(payload) {
-  return jwt.sign(payload, privateKey, options);
-}
+const sign = payload => jwt.sign(payload, privateKey, options);
 
-function decode(token) {
+const decode = (token) => {
   jwt.decode(token, { complete: true });
-}
+};
 
-module.exports = {
+export default {
   verify,
   sign,
   decode,
