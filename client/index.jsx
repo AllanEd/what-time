@@ -1,19 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Router } from 'react-router';
-import { Provider } from 'react-redux';
+import reduxStore from '../common/store/reduxStore';
 
-import store from '../common/store/configureStore';
-
-import history from '../common/history';
-import routes from '../common/routes';
+import App from '../common/App';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      {routes}
-    </Router>
-  </Provider>,
+  <App store={reduxStore} />,
   document.getElementById('app'),
 );

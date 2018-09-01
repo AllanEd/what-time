@@ -18,7 +18,6 @@ class AppointmentsPage extends React.Component {
 
   render() {
     const { appointments } = this.props;
-    debugger;
     if (appointments === null) {
       return (
         <div>
