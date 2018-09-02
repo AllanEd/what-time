@@ -2,11 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 
-import Routes from './Routes';
+import Root from './routes/Root';
+
+import './scss/main.scss';
+import 'normalize.css';
 
 const App = ({ store }) => (
   <Provider store={store}>
-    <Routes />
+    <Root />
   </Provider>
 );
 
