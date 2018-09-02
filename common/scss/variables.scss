@@ -1,8 +1,16 @@
 //colors
 $what-time-black: #000;
+$what-time-white: #FFF;
 $what-time-gray: #364B59; 
+$what-time-orange: #EE962C;
+$what-time-green: #59BAD3;
 
-$gutter-0-5: 16px * .5;
+$font-size-l: 1.5em;
+$font-size-m: 1em;
+$font-size-s: .8em;
+
 $gutter-1: 16px;
-$gutter-1-5: 16px * 1.5;
+$gutter-0-5: $gutter-1 * .5;
+$gutter-1-5: $gutter-1 * 1.5;
 $gutter-2: $gutter-1 * 2;
+$gutter-6: $gutter-1 * 6;

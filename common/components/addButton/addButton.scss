@@ -1,0 +1,28 @@
+@import '../../scss/variables';
+
+.add-button {
+  position: fixed;
+  bottom: -$gutter-1;
+  right: -$gutter-1;
+  width: $gutter-6;
+  height: $gutter-6;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0 0 $gutter-1 $what-time-gray;
+  background: $what-time-orange;
+  border: none;
+
+  &--draggable {
+    background: red;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &__icon {
+    width: 30%;
+  }
+}

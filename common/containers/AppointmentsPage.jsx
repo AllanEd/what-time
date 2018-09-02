@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 
 import Actions from '../actions/appointmentsActions';
 
-import Appointment from '../components/appointment/Appointment';
+import TopBarInfo from '../components/topBarInfo';
+import Appointment from '../components/appointment';
+import AddButton from '../components/addButton';
 
 // TODO: Actually the hole implementation...
 class AppointmentsPage extends React.Component {
@@ -27,7 +29,9 @@ class AppointmentsPage extends React.Component {
     }
     return (
       <div>
+        <TopBarInfo text="Appointment Overview" />
         {appointments.map(appointment => <Appointment key={appointment.id} {...appointment} />)}
+        <AddButton />
       </div>
     );
   }
