@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createBrowserHistory, createMemoryHistory } from 'history';
 
 import reduxStore from './store/reduxStore';
 
@@ -10,13 +9,11 @@ import AppointmentsPage from './containers/AppointmentsPage';
 import './scss/main.scss';
 import 'normalize.css';
 
-const history = typeof window !== 'undefined' ? createBrowserHistory() : createMemoryHistory();
-
 const { login } = reduxStore.getState();
 const isUserLoggedIn = login !== null;
 
 const Routes = () => (
-  <Router history={history}>
+  <Router>
     <Route
       exact
       path="/"
