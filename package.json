@@ -6,7 +6,7 @@
   "scripts": {
     "debug-apiServer": "nodemon --watch server --exec node --require dotenv/config --require babel-register --inspect server/apiServer.js",
     "debug-webServer": "nodemon --watch server --exec node --require dotenv/config --require babel-register --inspect server/webServer.js",
-    "start-apiServer": "node ./server/apiServer.js",
+    "start-apiServer": "node -r dotenv/config -r babel-register ./server/apiServer.js",
     "start-webServer": "node ./server/webServer.js",
     "build": "babel server/ -d server/",
     "lint": "eslint client/**",

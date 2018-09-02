@@ -1,19 +1,24 @@
 import mongoose from 'mongoose';
-import config from '../configuration';
 
 import User from './entities/User';
 import Appointment from './entities/Appointment';
 import Week from './entities/Week';
 import Day from './entities/Day';
 
-mongoose.connect(config.connectionString, { useNewUrlParser: true });
+const connect = async (connectionString, callback) => {
+  await mongoose.connect(connectionString, { useNewUrlParser: true });
+  callback();
+};
 
-const mongoDb = mongoose.connection;
+const dropDatabase = () => {
+  mongoose.connection.dropDatabase();
+};
 
 export default {
   User,
   Appointment,
   Week,
   Day,
-  dropDatabase: () => mongoDb.dropDatabase(),
+  connect,
+  dropDatabase,
 };
