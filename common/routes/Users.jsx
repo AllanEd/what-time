@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect, Switch } from 'react-router-dom';
-
 import AppointmentsPage from '../containers/AppointmentsPage';
+import NewAppointmentPage from '../containers/NewAppointmentPage';
 
 const routes = path => (
   <Switch>
     <Redirect exact from="/users" to={`${path}/appointments`} />
-    <Route path={`${path}/appointments`} component={AppointmentsPage} />
+    <Route exact path={`${path}/appointments`} component={AppointmentsPage} />
+    <Route path={`${path}/appointments/new`} component={NewAppointmentPage} />
   </Switch>
 );
+
 const redirectToLogin = <Redirect to="/" />;
 
 const authenticate = (path, isUserLoggedIn) => (isUserLoggedIn ? routes(path) : redirectToLogin);

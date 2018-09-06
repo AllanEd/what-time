@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
-
 import isEmail from 'validator/lib/isEmail';
-
 import * as Actions from '../actions/loginActions';
 
 class LoginPage extends React.Component {

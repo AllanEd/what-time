@@ -1,21 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
-
 import Actions from '../actions/appointmentsActions';
-
 import TopBarInfo from '../components/topBarInfo';
 import Appointment from '../components/appointment';
 import AddButton from '../components/addButton';
 
-// TODO: Actually the hole implementation...
 class AppointmentsPage extends React.Component {
   constructor(props) {
     super(props);
 
     const { getAppointments } = this.props;
+    this.redirectToNewAppointmentPage = this.redirectToNewAppointmentPage.bind(this);
     getAppointments();
+  }
+
+  redirectToNewAppointmentPage() {
+    const { history } = this.props;
+    history.push('appointments/new');
   }
 
   render() {
@@ -29,9 +31,9 @@ class AppointmentsPage extends React.Component {
     }
     return (
       <div>
-        <TopBarInfo text="Appointment Overview" />
+        <TopBarInfo text="Appointments Overview" />
         {appointments.map(appointment => <Appointment key={appointment.id} {...appointment} />)}
-        <AddButton />
+        <AddButton clickFunction={this.redirectToNewAppointmentPage} />
       </div>
     );
   }
@@ -40,6 +42,7 @@ class AppointmentsPage extends React.Component {
 AppointmentsPage.propTypes = {
   getAppointments: PropTypes.func.isRequired,
   appointments: PropTypes.arrayOf(PropTypes.shape()),
+  history: PropTypes.shape().isRequired,
 };
 
 AppointmentsPage.defaultProps = {

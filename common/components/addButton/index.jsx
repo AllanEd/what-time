@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import addButtonIcon from './addButton.svg';
 import './addButton.scss';
@@ -80,6 +81,7 @@ class AddButton extends React.Component {
 
   render() {
     const { draggable, top, left } = this.state;
+    const { clickFunction } = this.props;
 
     return (
       <div
@@ -91,6 +93,8 @@ class AddButton extends React.Component {
         onDrag={this.moveButton}
         onDragEnd={this.closeDrag}
         onDoubleClick={this.resetPosition}
+        onClick={clickFunction}
+        onKeyDown={clickFunction}
         ref={this.myRef}
         role="button"
         tabIndex={0}
@@ -100,5 +104,9 @@ class AddButton extends React.Component {
     );
   }
 }
+
+AddButton.propTypes = {
+  clickFunction: PropTypes.func.isRequired,
+};
 
 export default AddButton;
