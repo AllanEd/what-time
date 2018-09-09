@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import AppointmentsPage from '../containers/AppointmentsPage';
-import NewAppointmentPage from '../containers/NewAppointmentPage';
+import NewAppointmentPage from '../containers/newAppointmentPage';
 
 const routes = path => (
   <Switch>
