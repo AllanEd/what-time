@@ -20,7 +20,7 @@ const login = (name, password) => async (dispatch) => {
     password,
   };
 
-  const { token, loggedInUser } = await http.post('http://localhost:9000/api/users/login', postData);
+  const { token, loggedInUser } = await http.post(`${process.env.REACT_APP_API_HOST}/api/users/login`, postData);
 
   localStore.set(
     LOGIN,

@@ -12,8 +12,8 @@ const services = servicesFactory.create(repositories);
 const api = apiFactory.create(services);
 const sampleData = sampleDataFactory.create(services);
 
-db.connect(config.connectionString, () => {
-  logger.info(`Database establised on ${config.connectionString}`);
+db.connect(config.dBconnectionString, () => {
+  logger.info(`Database establised on ${config.dBconnectionString}`);
 });
 
 const apiServer = api.listen(config.api.port, () => {
