@@ -2,8 +2,8 @@ import React from 'react';
 import TopBarInfo from '../../components/topBarInfo';
 import './newAppointmentPage.scss';
 
-const WEEKPICKER_WIDTH = 100;
-const WEEKPICKER_HEIGHT = 100;
+const WEEKPICKER_WIDTH = 200;
+const WEEKPICKER_HEIGHT = 200;
 
 class AppointmentsPage extends React.Component {
   constructor(props) {
@@ -12,77 +12,59 @@ class AppointmentsPage extends React.Component {
     this.state = {
       weekPicker: {
         active: false,
+        value: 0,
       },
     };
 
-    this.activateWeekPicker = this.activateWeekPicker.bind(this);
-    this.changeSize = this.changeSize.bind(this);
+    this.showWeekPicker = this.showWeekPicker.bind(this);
+    this.hideWeekPicker = this.hideWeekPicker.bind(this);
+    this.setWeekPickerValue = this.setWeekPickerValue.bind(this);
   }
 
-  activateWeekPicker(e) {
+  setWeekPickerValue(value) {
+    this.setState(prevState => ({
+      weekPicker: {
+        ...prevState.weekPicker,
+        value,
+      },
+    }));
+  }
+
+  showWeekPicker(e) {
     const { clientX } = e.touches[0];
     const { clientY } = e.touches[0];
+
     this.setState({
       weekPicker: {
         active: true,
         left: clientX - (WEEKPICKER_WIDTH / 2),
         top: clientY - (WEEKPICKER_HEIGHT / 2),
-        width: WEEKPICKER_WIDTH,
-        height: WEEKPICKER_HEIGHT,
       },
-      initClientX: clientX,
-      initClientY: clientY,
-      oldClientX: clientX,
-      oldClientY: clientY,
     });
   }
 
-  changeSize(e) {
-    const { clientX } = e.touches[0];
-    const { clientY } = e.touches[0];
-
-    const {
-      weekPicker, initClientX, initClientY, oldClientX, oldClientY,
-    } = this.state;
-
-    const a1 = initClientX - clientX;
-    const a2 = initClientY - clientY;
-    const a = Math.sqrt((a1 ** 2) + (a2 ** 2));
-    const b1 = initClientX - oldClientX;
-    const b2 = initClientY - oldClientY;
-    const b = Math.sqrt((b1 ** 2) + (b2 ** 2));
-
-    const distance = a - b;
-
-    const {
-      left, top, width, height,
-    } = weekPicker;
-
-    this.setState({
+  hideWeekPicker() {
+    this.setState(prevState => ({
       weekPicker: {
-        active: true,
-        left: left - (distance * 0.5),
-        top: top - (distance * 0.5),
-        width: width + distance,
-        height: height + distance,
+        ...prevState.weekPicker,
+        active: false,
       },
-      initClientX,
-      initClientY,
-      oldClientX: clientX,
-      oldClientY: clientY,
-    });
+    }));
   }
 
   render() {
     const { weekPicker } = this.state;
     const {
-      left, top, width, height,
+      left, top,
     } = weekPicker;
 
     return (
       <div>
         <TopBarInfo text="New Appointment" />
-        <form className="content">
+        <form
+          className="content"
+          onTouchEnd={this.hideWeekPicker}
+        >
           <input className="content__input content__input--first" type="text" name="title" placeholder="Title" />
           <input className="content__input" type="date" name="startDate" placeholder="Start date" />
           <input
@@ -90,22 +72,35 @@ class AppointmentsPage extends React.Component {
             type="number"
             name="weeks"
             placeholder="Weeks"
-            onTouchStart={this.activateWeekPicker}
+            onTouchStart={this.showWeekPicker}
           />
           <input className="content__input" type="submit" value="Submit" />
         </form>
-        <div
+        <div className={`week-picker-container ${weekPicker.active ? 'week-picker-container--active' : ''}`}>
+          <div style={{ transform: `translate3d(${left}px, ${top}px, 2px)` }} className={`week-picker ${weekPicker.active ? 'week-picker--active' : ''}`}>
+            <div
+              className={`week week--first ${weekPicker.value === 1 ? 'week--active' : ''}`}
+            >
+              1
+            </div>
+            <div className="week">
+              2
+            </div>
+            <div className="week">
+              3
+            </div>
+            <div className="week">
+              4
+            </div>
+            {/* <div
           className={`week-picker ${weekPicker.active ? 'week-picker--active' : ''}`}
-          onMouseMove={this.test}
-        >
-          <div
-            className="week-picker__selector"
             style={{
-              top, left, width, height,
+              width,
+              height,
+              transform: `translate3d(${left}px, ${top}px, 2px)`,
             }}
-            onTouchMove={this.changeSize}
-            ref={div => this.weekPickerSelector = div}
-          />
+          /> */}
+          </div>
         </div>
       </div>
     );

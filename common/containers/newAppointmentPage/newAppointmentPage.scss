@@ -1,4 +1,4 @@
-@import '../../scss/variables';
+@import "../../scss/variables";
 
 .content {
   display: flex;
@@ -16,27 +16,56 @@
   }
 }
 
-.week-picker {
-  width: 100px;
-  height: 100px;
-  background: red;
+.week-picker-container {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translate3d(0, 0, 1px);
+  overflow: hidden;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   &--active {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba($color: $what-time-gray, $alpha: 0.8);
+    display: block;
+  }
+}
+
+.week-picker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  background: green;
+
+  &--active {
+    display: block;
+  }
+}
+
+.week {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: $what-time-light-yellow;
+  float: left;
+  margin-left: calc(50px / 3);
+
+  &:hover {
+    background: red !important;
   }
 
-  &__selector {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: $what-time-orange;
+  &--first {
+    margin-left: 0;
   }
 }

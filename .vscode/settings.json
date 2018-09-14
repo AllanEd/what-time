@@ -6,5 +6,7 @@
     "mocha.requires": [
         "babel-register",
         "babel-preset-flow",
-    ]
+    ],
+    "sassFormat.indent": 2,
+    "editor.formatOnSave": true
 }
