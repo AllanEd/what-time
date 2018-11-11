@@ -35,9 +35,9 @@ class LoginPage extends React.Component {
   userLogin(event) {
     event.preventDefault();
 
-    const { login } = this.props;
+    const { loginAction } = this.props;
     const { name, password } = this.state;
-    login(name, password);
+    loginAction(name, password);
   }
 
   isValidEmail() {
@@ -69,17 +69,17 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes = {
-  login: PropTypes.func.isRequired,
+  loginAction: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    login: state.login,
+    loginState: state.login,
   };
 }
 
 const mapDispatchToProps = dispatch => ({
-  login: (name, password) => {
+  loginAction: (name, password) => {
     dispatch(Actions.login(name, password));
   },
 });
